@@ -1,4 +1,4 @@
-# covid19_fe
+# Dashboard for Covid19 Analysis Website
 
 ## Project setup
 ```
