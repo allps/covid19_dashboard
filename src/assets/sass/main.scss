@@ -1,0 +1,36 @@
+$navbar-item-color: #ffffff;
+$navbar-item-hover-color:#80B5FF;
+$navbar-item-hover-background-color:transparent;
+$primary:white;
+$background:#042554;
+@import '~bulma/bulma';
+@import '~buefy/src/scss/buefy';
+
+.title{
+  color: white;
+}
+
+.menu-wrapper{
+  height:5rem;
+  width:100%;
+  padding:0rem 3rem 0rem 3rem;
+  background-color: #01132c;
+  color: white;
+}
+
+.card{
+  width:23rem;
+  padding-top:1rem;
+  border-radius: 25px;
+
+}
+
+.totalCases{
+  float: left;
+  padding-top: 1rem;
+  display: flex;
+  justify-content: space-around;
+}
+.paddingRight{
+  padding: 10px;
+}
