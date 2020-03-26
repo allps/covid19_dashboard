@@ -1,42 +1,60 @@
-$navbar-item-color: #ffffff;
-$navbar-item-hover-color:#80B5FF;
-$navbar-item-hover-background-color:transparent;
-$primary:white;
-$background:#042554;
-@import '~bulma/bulma';
-@import '~buefy/src/scss/buefy';
+@charset "utf-8";
 
-.title{
-  color: white;
+// Import a Google Font
+@import url('https://fonts.googleapis.com/css?family=Nunito:400,700');
+
+// Set your brand colors
+$purple: #8A4D76;
+$pink: #FA7C91;
+$brown: #757763;
+
+// Update Bulma's global variables
+$family-sans-serif: "Nunito", sans-serif;
+$grey-dark: $brown;
+$primary: $purple;
+$link: $pink;
+$widescreen-enabled: false;
+$fullhd-enabled: false;
+
+// Update some of Bulma's component variables
+$control-border-width: 2px;
+$input-border-color: transparent;
+$input-shadow: none;
+
+// Import only what you need from Bulma
+@import "node_modules/bulma/sass/utilities/_all.sass";
+@import "node_modules/bulma/sass/base/_all.sass";
+@import "node_modules/bulma/sass/elements/button.sass";
+@import "node_modules/bulma/sass/elements/container.sass";
+@import "node_modules/bulma/sass/elements/title.sass";
+@import "node_modules/bulma/sass/form/_all.sass";
+@import "node_modules/bulma/sass/components/navbar.sass";
+@import "node_modules/bulma/sass/layout/hero.sass";
+@import "node_modules/bulma/sass/layout/section.sass";
+@import "node_modules/bulma/sass/grid/columns";
+
+@import url('https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,700,800&display=swap');
+
+
+.mb6{
+ margin-bottom: 6rem !important;
 }
 
-.menu-wrapper{
-  height:5rem;
-  width:100%;
-  padding:0rem 3rem 0rem 3rem;
-  background-color: #042554;
-  color: white;
+nav{
+  padding: 0.5rem;
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.45);
+  margin-bottom: 3rem;
 }
 
-
-.totalCases{
-  height: 10rem;background-color: white;border-radius: 15px; margin-left:10px
-
-}
-.paddingRight{
-  padding: 10px;
+.navbar{
+  background: #f3f3f3;
 }
 
-.card{
-  border-radius: 15px!important;
-}
-.image.is-3by2{
-  margin-left: auto;
-  margin-right: auto;
+a.navbar-item, .navbar-link {
+  text-align: left;
 }
 
-.countryDropdown{
-  text-align: center;
-  margin-bottom: 2rem;
-  font-size: 20px;
+body{
+  background: #f3f3f3;
+  font-family: 'Nunito Sans', sans-serif;
 }
