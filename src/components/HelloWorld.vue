@@ -52,54 +52,58 @@
            <div id="main" style="width:100%; height:300px; padding-top:1rem">
 
            </div>
-
          </div>
-        <div class="totalCases">
-          <div class="paddingRight">
-              <div class="card">
-                <div class="card-content" >
-                  <p class="title is-4">
-                      Affected People
-                  </p>
-                  <p class="subtitle">
-                    {{confirmedCases}}
-                  </p>
+
+            <div class="columns" style="margin-top: 10px">
+                <div class="column totalCases">
+                    <p class="title is-4">
+                        Affected People
+                    </p>
+                    <p class="subtitle is-2">
+                        {{confirmedCases.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}
+                    </p>
                 </div>
-
-              </div>
-          </div>
-          <div class="paddingRight">
-              <div class="card">
-                <div class="card-content" >
-                  <p class="title is-4">
-                    People Cured
-                  </p>
-                  <p class="subtitle" >
-                     {{recoveredCases}}
-                  </p>
+                <div class="column totalCases">
+                    <p class="title is-4">
+                        People Cured
+                    </p>
+                    <p class="subtitle is-2" >
+                        {{recoveredCases.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}
+                    </p>
                 </div>
-
-              </div>
-          </div>
-          <div class="paddingRight">
-              <div class="card">
-                <div class="card-content">
-                  <p class="title is-4">
-                    People Died
-                  </p>
-                  <p class="subtitle">
-                    {{deathCases}}
-                  </p>
+                <div class="column totalCases">
+                    <p class="title is-4">
+                        People Died
+                    </p>
+                    <p class="subtitle is-2">
+                        {{deathCases.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}}
+                    </p>
                 </div>
+            </div>
 
-              </div>
-          </div>
-        </div>
-      </div>
+             <div class="columns" style="padding: 1rem 0rem 0rem 0rem">
+               <div class="column mortalCases">
+                 <div  style="height:400px; width:100% ;">
+                 </div>
+               </div>
 
+                 <div class="column mortalCases" style="margin-left: 1rem">
+                     <div id="bar" style="height:400px; width:100% ;">
+                     </div>
+                 </div>
+             </div>
+
+     </div>
     </section>
 
 
+  <section class="secondContent">
+      <div class="container">
+          <h1 class="title is-3">
+              Regional Corona Virus Outbreak
+          </h1>
+      </div>
+  </section>
 
   </div>
 </template>
@@ -128,6 +132,7 @@ export default {
     });
     this.totalCasesWorld();
     this.drawChart();
+    this.drawMortalityBarGraph();
   },
 
 
@@ -155,7 +160,7 @@ export default {
       drawChart(){
           // eslint-disable-next-line no-undef
           var myChart = echarts.init(document.getElementById('main'));
-        this.axiosInstance.get("/cases/confirmed")
+          this.axiosInstance.get("/cases/confirmed")
                 .then(response=>{
                   console.log(response.data)
                   var str=response.data;
@@ -239,6 +244,69 @@ export default {
 
       },
 
+
+    drawMortalityBarGraph(){
+      // eslint-disable-next-line no-undef
+      var myChart = echarts.init(document.getElementById('bar'));
+      this.axiosInstance.get("/perCountry/mortality")
+      .then(response=>{
+        console.log(response.data)
+        var str=response.data;
+        if (str.includes("\"")) {
+          var valid_str = JSON.parse(str);
+        }
+
+        var arr_x = valid_str.json_xax;
+        var arr_y = valid_str.json_yax;
+        console.log(arr_y,arr_x)
+
+        myChart.setOption(
+                 {
+                     title: {
+                         text: 'Mortality in Countries',
+                         subtext: '(World-wide)'
+                     },
+                     tooltip: {
+                         trigger: 'axis',
+                         axisPointer: {
+                             type: 'shadow'
+                         }
+                     },
+                     legend: {
+                         data: ['Mortality']
+                     },
+                     grid: {
+                         left: '3%',
+                         right: '4%',
+                         bottom: '3%',
+                         containLabel: true
+                     },
+                     xAxis: {
+                         type: 'value',
+                         boundaryGap: [0, 0.01]
+                     },
+                     yAxis: {
+                         type: 'category',
+                         data: arr_y
+                     },
+                     series: [
+                         {
+                             name: 'Mortality Rate',
+                             type: 'bar',
+                             data: arr_x,
+                             color:'#0071BB',
+                         },
+
+                     ]
+                }
+
+      )
+      }).catch(error=>{
+        console.log(error.response.data)
+      })
+
+    },
+
   }
 }
 </script>
@@ -252,18 +320,34 @@ export default {
 }
   .content{
     width:100%;
-    height:50rem;
+    height:80rem;
     background-color: #01132c;
+    margin-bottom: auto!important;
   }
 .confirmedCasesChart{
   width:100%;
-  height:350px;
+  height:20rem;
   background-color: white;
   padding:0rem 3rem 0rem 3rem;
-  border-radius: 25px;
+  border-radius: 15px;
 }
   .title.is-4{
     color: #01132c;
     padding-bottom: 1rem;
+    padding-top: 1rem;
   }
+
+.mortalCases{
+  height:28rem;
+  background-color: white;
+  padding: 1rem 1rem 1rem 1rem;
+  border-radius: 15px;
+}
+.secondContent{
+    padding: 0rem;
+    width:100%;
+    height:40rem;
+    background-color: #042554;
+}
+
 </style>
