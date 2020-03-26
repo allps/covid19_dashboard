@@ -21,7 +21,7 @@
               Contribute
             </b-navbar-item>
             <b-navbar-item href="">
-              <button class="button" style="background-color: #80B5FF">Contact us</button>
+              <button class="button has-text-primary" style="background-color: #80B5FF">Contact us</button>
             </b-navbar-item>
 
           </template>
@@ -36,7 +36,8 @@
             <h1 class="title is-2">
               Everything you wanted to know about <span style="color:#FF6663;">COVID-19</span>
             </h1>
-            <button class="button has-text-primary" style="background-color: #042554" @click="scrollWin()"> Know More</button>
+            <button class="button has-text-primary" style="background-color: #042554" @click="scrollWin()"> Know More</button>&nbsp;&nbsp;
+              <button class="button has-text-primary" style="background-color: #80B5FF"> Contact Us</button>
           </div>
         </div>
       </section>
@@ -81,9 +82,9 @@
                 </div>
             </div>
 
-             <div class="columns" style="padding: 1rem 0rem 0rem 0rem">
+             <div class="columns" style="margin-top: 10px">
                <div class="column mortalCases">
-                 <div  style="height:400px; width:100% ;">
+                 <div id="worldMap" style="height:400px; width:100% ;">
                  </div>
                </div>
 
@@ -96,7 +97,6 @@
      </div>
     </section>
 
-
   <section class="secondContent">
       <div class="container">
           <h1 class="title is-3">
@@ -105,6 +105,97 @@
       </div>
   </section>
 
+      <section class="moreInfoContent">
+          <div class="container">
+              <h1 class="title is-3">
+                  More Info
+              </h1>
+              <div class="columns">
+                  <div class="column">
+                      <div class="card">
+                              <figure class="image is-3by2" >
+                                  <img src="../assets/Image2.png" style="border-radius: 15px">
+                              </figure>
+                          <div class="card-content">
+                              <h1 class="title" style="color:#031C3F">
+                                Symptoms
+                              </h1>
+                              <button class="button has-text-primary" style="background-color:#031C3F">Know More</button>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="column">
+                      <div class="card">
+                          <figure class="image is-3by2">
+                              <img src="../assets/Image1.png" style="border-radius: 15px">
+                          </figure>
+                          <div class="card-content">
+                              <h1 class="title"  style="color:#031C3F">
+                                  Precautions
+                              </h1>
+                              <button class="button has-text-primary" style="background-color:#031C3F">Know More</button>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="column">
+                      <div class="card">
+                          <figure class="image is-3by2">
+                              <img src="../assets/Image5.png" style="border-radius: 15px">
+                          </figure>
+                          <div class="card-content">
+                              <h1 class="title"  style="color:#031C3F">
+                                  HelpLine
+                              </h1>
+                              <button class="button has-text-primary" style="background-color:#031C3F">Know More</button>
+                          </div>
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+      </section>
+
+      <section class="hero is-primary is-medium">
+          <div class="hero-body">
+              <div class="container">
+                  <h1 class="title">
+                     Want to know how we are doing this?
+                  </h1>
+                  <button class="button">Know Our Process?</button>
+              </div>
+          </div>
+      </section>
+
+      <section class="hero is-medium" style="background-color: #042554">
+          <div class="hero-body">
+              <div class="container">
+                  <h1 class="title">
+                     Spread a word about us
+                  </h1><br>
+                  <h1 class="subtitle has-text-primary">
+                      Let your friends and family know about us, Together We can overcome this crises
+                  </h1>
+
+              </div>
+          </div>
+      </section>
+
+      <div>
+          <b-navbar class="menu-wrapper" >
+              <template slot="start" >
+                  <b-navbar-item href="">
+                      About Us
+                  </b-navbar-item>
+                  <b-navbar-item href="">
+                      Sources
+                  </b-navbar-item>
+                  <b-navbar-item href="">
+                      Contribute
+                  </b-navbar-item>
+              </template>
+
+          </b-navbar>
+      </div>
   </div>
 </template>
 
@@ -133,6 +224,7 @@ export default {
     this.totalCasesWorld();
     this.drawChart();
     this.drawMortalityBarGraph();
+
   },
 
 
@@ -244,8 +336,7 @@ export default {
 
       },
 
-
-    drawMortalityBarGraph(){
+      drawMortalityBarGraph(){
       // eslint-disable-next-line no-undef
       var myChart = echarts.init(document.getElementById('bar'));
       this.axiosInstance.get("/perCountry/mortality")
@@ -348,6 +439,12 @@ export default {
     width:100%;
     height:40rem;
     background-color: #042554;
+}
+.moreInfoContent{
+    width:100%;
+    height:50rem;
+    background-color: #01132c;
+    margin-bottom: auto!important;
 }
 
 </style>
