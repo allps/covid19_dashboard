@@ -14,7 +14,7 @@ window.echarts = require('echarts/dist/echarts.js');
 // eslint-disable-next-line no-undef
 Vue.use(echarts);
 window.axios = axios;
-axios.defaults.baseURL = "http://127.0.0.1:8000/";
+axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
 // make navbar work on mobile
 
