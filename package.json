@@ -13,6 +13,8 @@
     "bulma": "^0.8.1",
     "core-js": "^3.6.4",
     "echarts": "^4.7.0",
+    "echarts-leaflet": "^1.1.0",
+    "leaflet": "^1.6.0",
     "vue": "^2.6.11",
     "vue-router": "^3.1.6"
   },
@@ -25,6 +27,7 @@
     "eslint-plugin-vue": "^6.1.2",
     "node-sass": "^4.13.1",
     "sass-loader": "^8.0.2",
+    "svg-inline-loader": "^0.8.2",
     "vue-template-compiler": "^2.6.11",
     "webpack": "^4.42.1"
   },

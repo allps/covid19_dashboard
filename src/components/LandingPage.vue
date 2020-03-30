@@ -1,13 +1,16 @@
 <template>
     <div>
         <nav-bar></nav-bar>
-        <section class="section">
+        <section class="section pt0">
             <h1 class="title has-text-centered">
-                Novel Corona Virus (COVID19) Statistics
+                Novel Corona Virus (COVID-19) Statistics
             </h1>
-            <h2 class="subtitle has-text-centered mb8">
+            <h2 class="subtitle has-text-centered mb4">
                 Last updated: {{lastUpdatedTime}} ({{hoursAgo}} hours ago)
             </h2>
+            <div class="visualization-wrapper">
+                <world-map></world-map>
+            </div>
             <div class="columns has-text-centered main-stats">
                 <div class="column">
                     <p class="title is-size-4">
@@ -75,11 +78,13 @@
     import StackedLargeScaleAreaChart from "./StackedLargeScaleAreaChart";
     import CountryWiseMortalityRate from "./CountryWiseMortalityRate";
     import AllCasesPieCharts from "./AllCasesPieCharts";
+    import WorldMap from "./maps/WorldMap";
     const lazy = () => import('./Navbar.vue');
 
     export default {
         name: 'LandingPage',
         components:{
+            WorldMap,
             AllCasesPieCharts,
             CountryWiseMortalityRate,
             StackedLargeScaleAreaChart,
