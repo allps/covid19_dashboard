@@ -5,7 +5,7 @@
             <h1 class="title has-text-centered">
                 Novel Corona Virus (COVID-19) Statistics
             </h1>
-            <h2 class="subtitle has-text-centered mb4">
+            <h2 class="subtitle has-text-centered mb2">
                 Last updated: {{lastUpdatedTime}} ({{hoursAgo}} hours ago)
             </h2>
             <div class="visualization-wrapper">
@@ -134,7 +134,7 @@
                         this.$data.totalCountriesAffected = valid_str.totalCountries;
 
                     }).catch(error => {
-                    console.log(error.response.data)
+                    console.log(error.response)
                 })
             },
 

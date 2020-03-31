@@ -1,9 +1,29 @@
 <template>
     <div>
+        <p class="tooltiptext" id="tooltip"></p>
         <div class="map-container">
+            <div class="has-text-centered is-size-6 mb3 has-text-weight-bold">
+            <div class="select">
+                <div class="field is-horizontal">
+                    <div class="field-body">
+                        <div class="field is-narrow">
+                            <div class="control">
+                                <div class="select is-fullwidth">
+                                    <select @change="paintMap(statsShown)" v-model="statsShown" ref="selectedItem">
+                                        <option value="confirmed" selected>Showing Confirmed Cases</option>
+                                        <option value="recovered">Showing Recovered Cases</option>
+                                        <option value="deaths">Showing Deaths</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
             <svg version="1.1"
-                 viewBox="-140 0 1400 650" preserveAspectRatio="xMinYMin meet" style="stroke-linejoin: round; stroke:#000; fill: none;">
-                <g>
+                 viewBox="-160 0 1400 650" preserveAspectRatio="xMinYMin meet" style="stroke-linejoin: round; stroke:#000; fill: none;">
+                <g v-on:mousemove="handleMouseMove" v-on:mouseleave="handleMouseLeave">
                     <path id="AE" title="United Arab Emirates" class="land" d="M619.87,393.72L620.37,393.57L620.48,394.41L622.67,393.93L624.99,394.01L626.68,394.1L628.6,392.03L630.7,390.05L632.47,388.15L633,389.2L633.38,391.64L631.95,391.65L631.72,393.65L632.22,394.07L630.95,394.67L630.94,395.92L630.12,397.18L630.05,398.39L629.48,399.03L621.06,397.51L619.98,394.43z"/>
                     <path id="AF" title="Afghanistan" class="land" d="M646.88,356.9L649.74,358.2L651.85,357.74L652.44,356.19L654.65,355.67L656.23,354.62L656.79,351.83L659.15,351.15L659.59,349.9L660.92,350.84L661.76,350.95L663.32,350.98L665.44,351.72L666.29,352.14L668.32,351.02L669.27,351.69L670.17,350.09L671.85,350.16L672.28,349.64L672.58,348.21L673.79,346.98L675.3,347.78L675,348.87L675.85,349.04L675.58,351.99L676.69,353.14L677.67,352.4L678.92,352.06L680.66,350.49L682.59,350.75L685.49,350.75L685.99,351.76L684.35,352.15L682.93,352.8L679.71,353.2L676.7,353.93L675.06,355.44L675.72,356.9L676.05,358.6L674.65,360.03L674.77,361.33L674,362.55L671.33,362.44L672.43,364.66L670.65,365.51L669.46,367.51L669.61,369.49L668.51,370.41L667.48,370.11L665.33,370.54L665.03,371.45L662.94,371.45L661.38,373.29L661.28,376.04L657.63,377.37L655.68,377.09L655.11,377.79L653.44,377.39L650.63,377.87L645.94,376.23L648.48,373.3L648.25,371.2L646.13,370.65L645.91,368.56L644.99,365.92L646.19,364.09L644.97,363.6L645.74,361.15z"/>
                     <path id="AL" title="Albania" class="land" d="M532.98,334.66L532.63,335.93L533.03,337.52L534.19,338.42L534.13,339.39L533.22,339.93L533.05,341.12L531.75,342.88L531.27,342.63L531.22,341.83L529.66,340.6L529.42,338.85L529.66,336.32L530.04,335.16L529.57,334.57L529.38,333.38L530.6,331.51L530.77,332.23L531.53,331.89L532.13,332.91L532.8,333.29z"/>
@@ -182,24 +202,172 @@
                     <path id="ZW" title="Zimbabwe" class="land" d="M562.71,527L561.22,526.7L560.27,527.06L558.92,526.55L557.78,526.52L555.99,525.16L553.82,524.7L553,522.8L552.99,521.75L551.79,521.43L548.62,518.18L547.73,516.47L547.17,515.95L546.09,513.6L549.22,513.92L550.13,514.26L551.08,514.19L552.63,512.3L555.07,509.9L556.08,509.68L556.42,508.67L558.01,507.52L560.14,507.12L560.32,508.2L562.66,508.14L563.96,508.75L564.56,509.47L565.9,509.68L567.35,510.62L567.36,514.31L566.81,516.35L566.69,518.55L567.14,519.43L566.83,521.17L566.4,521.44L565.66,523.59z"/>
                 </g>
             </svg>
-
         </div>
     </div>
 </template>
 
 <script>
+    import axios from "axios";
     export default {
-        name: "WorldMap"
+        name: "WorldMap",
+        data(){
+            return {
+                color_swatch:{
+                    confirmed: ['#eff3ff','#bdd7e7','#6baed6','#3182bd','#08519c'],
+                    recovered: ['#edf8e9','#bae4b3','#74c476','#31a354','#006d2c'],
+                    deaths: ['#f1eef6','#d7b5d8','#df65b0','#dd1c77','#980043'],
+                    statsShown: 'confirmed'
+                },
+                country_data: {},
+                confirmed_cases:{},
+                recovered_cases:{},
+                deaths_cases:{},
+                country_names: {}
+            }
+        },
+
+        mounted() {
+            this.axiosInstance = axios.create({
+                timeout: 50000,
+                headers: {
+                    'Content-Type': 'application/json',
+                }
+            });
+            this.fetchData();
+            document.getElementsByTagName('select')[0].selectedIndex = 0;
+        },
+
+        methods:{
+            handleMouseLeave(){
+                document.getElementById("tooltip").classList.remove("active");
+            },
+
+            handleMouseMove(event) {
+                let countryId = event.target.id;
+
+                if(countryId === 'RU_asia' || countryId === 'RU_europe') {
+                    countryId = 'RU';
+                }
+
+                let data = {
+                    country: this.$data.country_names[countryId],
+                    confirmed: this.$data.confirmed_cases[countryId],
+                    recovered: this.$data.recovered_cases[countryId],
+                    deaths: this.$data.deaths_cases[countryId]
+                };
+
+                let tooltip = document.getElementById("tooltip");
+                let x = event.clientX;
+                let y = event.clientY;
+
+                let htmlStr = `<span class="has-text-weight-bold has-text-right">
+                                CNTRY
+                                </span>
+                                <br>
+                                <span class="confirmed-color">
+                                    Confirmed: CNF
+                                </span>
+                                <br>
+                                <span class="recovered-color">
+                                    Recovered: RCV
+                                </span>
+                                <br>
+                                <span class="deaths-color">
+                                    Deaths: DUD
+                                </span>`;
+                htmlStr = htmlStr.replace('CNF', data.confirmed)
+                    .replace('RCV', data.recovered)
+                    .replace('DUD', data.deaths)
+                    .replace('CNTRY', data.country);
+
+                tooltip.style.left = (x + 20) + "px";
+                tooltip.style.top = (y - 20) + "px";
+                tooltip.innerHTML =  htmlStr;
+                if(data.country) {
+                    tooltip.classList.add("active");
+                }
+
+            },
+            fetchData(){
+                let self = this;
+                this.axiosInstance.get('/map/global').then(response => {
+                    self.$data.country_data = response.data;
+                    self.isolateCaseStats();
+                    self.paintMap('confirmed');
+                }).catch(error => {
+                    console.log(error)
+                })
+            },
+
+            paintMap(statToShow, event){
+                if(['confirmed', 'recovered', 'deaths'].includes(statToShow)) {
+                    let color_swatch = this.$data.color_swatch[statToShow];
+
+                    this.$data.country_data[statToShow + '_list'].forEach(country_data => {
+                        let color_index = this.getColorIndex(country_data[statToShow]);
+                        if(country_data.country_code === 'RU') {
+                            document.getElementById('RU_asia').style.fill = color_swatch[color_index];
+                            document.getElementById('RU_europe').style.fill = color_swatch[color_index];
+                        } else {
+                            // color the graph
+                            let country = document.getElementById(country_data.country_code);
+
+                            if(country) {
+                                country.style.fill = color_swatch[color_index];
+                            } else {
+                                //console.log(country_data.country_code + ' coded country not found')
+                            }
+                        }
+                    });
+
+                }
+            },
+
+            isolateCaseStats(){
+
+                for(let i = 0; i < this.$data.country_data.confirmed_list.length; i++){
+                    this.$data.confirmed_cases[this.$data.country_data.confirmed_list[i].country_code] =
+                        this.$data.country_data.confirmed_list[i].confirmed;
+
+                    this.$data.recovered_cases[this.$data.country_data.recovered_list[i].country_code] =
+                        this.$data.country_data.recovered_list[i].recovered;
+
+                    this.$data.deaths_cases[this.$data.country_data.deaths_list[i].country_code] =
+                        this.$data.country_data.deaths_list[i].deaths;
+
+                    this.$data.country_names[this.$data.country_data.deaths_list[i].country_code] =
+                        this.$data.country_data.deaths_list[i].Country_Region;
+                }
+            },
+
+            getColorIndex(number_of_cases){
+                if (number_of_cases < 1) {
+                    number_of_cases = 1
+                }
+                let color_index = Math.floor(Math.log(number_of_cases) / Math.LN10 + 0.000000001);
+                if(color_index > 4){
+                    return 4
+                } else {
+                    return color_index
+                }
+            }
+        }
     }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+    @import "src/assets/sass/v-tooltip";
     .land {
         fill: #CCCCCC;
         fill-opacity: 1;
-        stroke:white;
+        stroke:#3a3a3a;
         stroke-opacity: 1;
         stroke-width:0.5;
+    }
+
+    .land:hover{
+        stroke: #363636;
+        stroke-width:2;
     }
 
     .map-container{
@@ -207,6 +375,34 @@
         margin: auto;
         margin-bottom: 5rem;
     }
+
+
+
+    .tooltiptext {
+        display: none;
+        width: 8rem;
+        padding: 0.3rem;
+        background-color: white;
+        text-align: center;
+        border-radius: 6px;
+        position: fixed;
+        z-index: 1;
+        box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+    }
+
+    .tooltiptext.active {
+        display: initial;
+    }
+
+    .input, .textarea, .select select{
+        border: 1px solid #7d7d7d;
+    }
+    .input:focus, .textarea:focus, .select select:focus, .is-focused.input, .is-focused.textarea, .select select.is-focused, .input:active, .textarea:active, .select select:active, .is-active.input, .is-active.textarea, .select select.is-active{
+        border: 1px solid #7d7d7d;
+        box-shadow: none;
+    }
+
+
 
     @media only screen and (max-width: 414px) {
         .map-container{

@@ -4,15 +4,19 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Set your brand colors
-$purple: #757763;
-$pink: #000;
+$grey-color: #7d7d7d;
+$svg-map-border-hover-color: #282c34;
+$black-color: #000;
 $brown: #757763;
+$green: #00d1b2;
+$red: #ff470f;
+$blue: #08519c;
 
 // Update Bulma's global variables
 $family-sans-serif: "Nunito", sans-serif;
 $grey-dark: $brown;
-$primary: $purple;
-$link: $pink;
+$primary: $grey-color;
+$link: $black-color;
 $widescreen-enabled: false;
 $fullhd-enabled: false;
 
@@ -35,21 +39,51 @@ $input-shadow: none;
 
 @import url('https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,700,800&display=swap');
 
+/**********************MARGINS******************/
+.mb2{
+  margin-bottom: 2rem !important;
+}
 
-.mb8{
- margin-bottom: 6rem !important;
+.mb3{
+  margin-bottom: 3rem !important;
 }
 
 .mb4{
   margin-bottom: 4rem !important;
 }
 
+.mb8{
+  margin-bottom: 6rem !important;
+}
+
 .mt0{
   margin-top:0 !important;
 }
 
+.mt2{
+  margin-top:2rem !important;
+}
+
+
+/**********************PADDINGS******************/
 .pt0{
   padding-top:0 !important;
+}
+
+.confirmed-color{
+  color: $blue !important
+}
+
+.recovered-color{
+  color: $green !important
+}
+
+.deaths-color{
+  color: $red !important
+}
+
+.case-type-selector {
+  cursor: pointer;
 }
 
 nav{
