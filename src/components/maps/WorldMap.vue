@@ -356,7 +356,6 @@
 </script>
 
 <style lang="scss" scoped>
-    @import "src/assets/sass/v-tooltip";
     .land {
         fill: #CCCCCC;
         fill-opacity: 1;
