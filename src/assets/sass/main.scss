@@ -9,7 +9,7 @@ $svg-map-border-hover-color: #282c34;
 $black-color: #000;
 $brown: #757763;
 $green: #00d1b2;
-$red: #ff470f;
+$red: #f14668;
 $blue: #08519c;
 
 // Update Bulma's global variables
@@ -36,6 +36,7 @@ $input-shadow: none;
 @import "node_modules/bulma/sass/layout/section.sass";
 @import "node_modules/bulma/sass/grid/columns";
 @import "node_modules/bulma/sass/elements/box.sass";
+@import "node_modules/bulma/sass/layout/footer";
 
 @import url('https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,700,800&display=swap');
 
@@ -62,6 +63,10 @@ $input-shadow: none;
 
 .mt2{
   margin-top:2rem !important;
+}
+
+.mt5{
+  margin-top:5rem !important;
 }
 
 
@@ -103,4 +108,8 @@ body{
 
 .box{
   box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.45);
+}
+
+.footer{
+ box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.45)
 }

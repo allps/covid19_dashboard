@@ -32,10 +32,10 @@
 
             drawChart(graphData) {
                 const myChart = window.echarts.init(document.getElementsByClassName("StackedLargeScaleAreaChart")[0]);
-                const x_axis = graphData.json_xax;
+                const x_axis = graphData.dates;
                 const arr_y = graphData.confirmed;
                 const recovered = graphData.recovered;
-                const death = graphData.death;
+                const death = graphData.deaths;
                 const human_date = [];
 
                 x_axis.forEach((x_axis_item) =>{
@@ -87,7 +87,7 @@
                                 symbol: 'none',
                                 sampling: 'average',
                                 itemStyle: {
-                                    color: 'rgb(255,15,7)'
+                                    color: '#f14668'
                                 },
                                 data: death
                             },
@@ -99,7 +99,7 @@
                                 symbol: 'none',
                                 sampling: 'average',
                                 itemStyle: {
-                                    color: 'rgb(0,255,11)'
+                                    color: '#48c774'
                                 },
                                 data: recovered
                             },
@@ -111,7 +111,7 @@
                                 symbol: 'none',
                                 sampling: 'average',
                                 itemStyle: {
-                                    color: 'rgb(52,111,255)'
+                                    color: '#3298dc'
                                 },
                                 data: arr_y
                             },

@@ -6,7 +6,7 @@
                 Novel Corona Virus (COVID-19) Statistics
             </h1>
             <h2 class="subtitle has-text-centered mb2">
-                Last updated: {{lastUpdatedTime}} ({{hoursAgo}} hours ago)
+                Last updated: {{lastUpdatedTime}} ({{hoursAgo}})
             </h2>
             <div class="visualization-wrapper">
                 <world-map></world-map>
@@ -49,8 +49,11 @@
 
                 <div class="visualization-wrapper box">
                     <h2 class="subtitle has-text-centered">
-                        Country wise mortality rate
+                        Country wise mortality and recovery rates
                     </h2>
+                    <p class="has-text-centered">
+                        (Showing for countries having confirmed cases 1000 or more.)
+                    </p>
                     <country-wise-mortality-rate></country-wise-mortality-rate>
                 </div>
 
@@ -61,13 +64,9 @@
                     <all-cases-pie-charts></all-cases-pie-charts>
                 </div>
             </div>
-
-            <div class="confirmedCasesChart">
-                <div id="worldMap" style="width:100%;height:300px; padding-top:1rem">
-
-                </div>
-            </div>
         </section>
+
+        <main-footer></main-footer>
 
     </div>
 </template>
@@ -79,11 +78,13 @@
     import CountryWiseMortalityRate from "./CountryWiseMortalityRate";
     import AllCasesPieCharts from "./AllCasesPieCharts";
     import WorldMap from "./maps/WorldMap";
+    import MainFooter from "./MainFooter";
     const lazy = () => import('./Navbar.vue');
 
     export default {
         name: 'LandingPage',
         components:{
+            MainFooter,
             WorldMap,
             AllCasesPieCharts,
             CountryWiseMortalityRate,
@@ -92,7 +93,7 @@
         },
         data() {
             return {
-                lastUpdatedTime: '27.03 18:53 GMT',
+                lastUpdatedTime: '',
                 hoursAgo: '6',
                 totalCases: '',
                 confirmedCases: '',
@@ -127,16 +128,52 @@
             totalCasesWorld() {
                 this.axiosInstance.get("/cases/total")
                     .then(response => {
-                        var valid_str = response.data;
-                        this.$data.confirmedCases = valid_str.confirmed;
-                        this.$data.recoveredCases = valid_str.recovered;
-                        this.$data.deathCases = valid_str.deaths;
-                        this.$data.totalCountriesAffected = valid_str.totalCountries;
+                        this.$data.confirmedCases = response.data.confirmed;
+                        this.$data.recoveredCases = response.data.recovered;
+                        this.$data.deathCases = response.data.deaths;
+                        this.$data.totalCountriesAffected = response.data.totalCountries;
+                        this.$data.lastUpdatedTime = (new Date(parseInt(response.data.created_at) * 1000)).toDateString();
+                        this.$data.hoursAgo = this.timeDifferenceForHumans((new Date().getTime()), (new Date(parseInt(response.data.created_at) * 1000)))
 
                     }).catch(error => {
                     console.log(error.response)
                 })
             },
+
+            timeDifferenceForHumans(current, previous) {
+
+                let msPerMinute = 60 * 1000;
+                let msPerHour = msPerMinute * 60;
+                let msPerDay = msPerHour * 24;
+                let msPerMonth = msPerDay * 30;
+                let msPerYear = msPerDay * 365;
+
+                let elapsed = current - previous;
+
+                if (elapsed < msPerMinute) {
+                    return Math.round(elapsed/1000) + ' seconds ago';
+                }
+
+                else if (elapsed < msPerHour) {
+                    return Math.round(elapsed/msPerMinute) + ' minutes ago';
+                }
+
+                else if (elapsed < msPerDay ) {
+                    return Math.round(elapsed/msPerHour ) + ' hours ago';
+                }
+
+                else if (elapsed < msPerMonth) {
+                    return 'approximately ' + Math.round(elapsed/msPerDay) + ' days ago';
+                }
+
+                else if (elapsed < msPerYear) {
+                    return 'approximately ' + Math.round(elapsed/msPerMonth) + ' months ago';
+                }
+
+                else {
+                    return 'approximately ' + Math.round(elapsed/msPerYear ) + ' years ago';
+                }
+            }
 
         }
     }
