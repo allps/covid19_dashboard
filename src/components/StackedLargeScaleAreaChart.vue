@@ -40,7 +40,7 @@
 
                 x_axis.forEach((x_axis_item) =>{
                     // Timestamp is in nanoseconds. Convert it to human readable form
-                    human_date.push((new Date(x_axis_item / 1000000)).toLocaleDateString());
+                    human_date.push((new Date(x_axis_item * 1000)).toLocaleDateString());
 
                     myChart.setOption({
                         renderer: 'svg',
