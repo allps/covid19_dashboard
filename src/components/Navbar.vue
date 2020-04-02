@@ -6,14 +6,14 @@
                     <img src="https://sciencefictionlab-public.s3.eu-central-1.amazonaws.com/covid19-bucket/logo.png">
                 </a>
 
-                <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                <a role="button" class="navbar-burger burger"  @click="showNav = !showNav" :class="{ 'is-active': showNav }">
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                 </a>
             </div>
 
-            <div id="navbarBasicExample" class="navbar-menu">
+            <div :class="{ 'is-active': showNav }" class="navbar-menu">
 
                 <div class="navbar-end">
                     <div class="navbar-item">
@@ -34,7 +34,10 @@
 
 <script>
     export default {
-        name: "Navbar"
+        name: "Navbar",
+        data(){
+            return {showNav: false}
+        }
     }
 </script>
 

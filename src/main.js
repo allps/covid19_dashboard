@@ -6,7 +6,12 @@ import VueRouter from 'vue-router';
 require('./assets/sass/main.scss');
 Vue.config.productionTip = false;
 Vue.use(VueRouter);
-// eslint-disable-next-line no-undef
+const router = new VueRouter({
+  routes: [
+    { name: 'Home', path: '/' },
+    { name: 'About', path: '/about' },
+  ]
+});
 
 
 window.echarts = require('echarts/dist/echarts.js');
@@ -16,7 +21,15 @@ Vue.use(echarts);
 window.axios = axios;
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
 
-// make navbar work on mobile
+
+//google analytics
+import VueGtag from "vue-gtag";
+if(process.env.VUE_APP_ENV === 'production'){
+  Vue.use(VueGtag, {
+    config: { id: "G-XLT1F25450" }
+  }, router);
+
+}
 
 new Vue({
   render: h => h(App),
