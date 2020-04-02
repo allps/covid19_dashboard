@@ -35,11 +35,23 @@
 
         <section>
             <div class="container">
-                <div class="visualization-wrapper box mb8">
+                <div class="visualization-wrapper box mb2">
                     <h2 class="subtitle has-text-centered">
                         Number of infected and death cases over time.
                     </h2>
                     <div class="StackedLargeScaleAreaChart" style="height: 400px"></div>
+
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <div class="visualization-wrapper box mb8">
+                    <h2 class="subtitle has-text-centered">
+                        State wise analysis(Infected and death cases)
+                    </h2>
+                    <div id="bar" style="height: 800px"></div>
 
                 </div>
             </div>
@@ -74,6 +86,7 @@
             });
 
             this.fetchData();
+            this.drawBarGraph();
         },
 
         methods: {
@@ -168,6 +181,63 @@
 
                     }, true)
                 });
+            },
+
+            drawBarGraph(){
+                this.axiosInstance.get("/us-data/each-state")
+                    .then(response => {
+                        var state_list = response.data.y_list;
+                        var case_list = response.data.case_list;
+                        var death_list = response.data.death_list;
+
+                        const myChart = window.echarts.init(document.getElementById('bar'));
+                        myChart.setOption({
+
+                                // title: {
+                                //     text: 'STATE WISE ANALYSIS',
+                                // },
+                                tooltip: {
+                                    trigger: 'axis',
+                                    axisPointer: {
+                                        type: 'shadow'
+                                    }
+                                },
+                                legend: {
+                                    data: ['Infected People', 'Deaths']
+                                },
+                                grid: {
+                                    left: '3%',
+                                    right: '4%',
+                                    bottom: '3%',
+                                    containLabel: true
+                                },
+                                xAxis: {
+                                    type: 'value',
+                                    boundaryGap: [0, 0.01]
+                                },
+                                yAxis: {
+                                    type: 'category',
+                                    data: state_list
+                                },
+                                series: [
+                                    {
+                                        name: 'Infected People',
+                                        type: 'bar',
+                                        data: case_list,
+                                        color: '#08519c',
+                                    },
+                                    {
+                                        name: 'Deaths',
+                                        type: 'bar',
+                                        data: death_list,
+                                        color: '#f14668'
+                                    }
+                                ]
+                        })
+
+                    }).catch(error => {
+                    console.log(error.response.data)
+                })
             },
 
         }
