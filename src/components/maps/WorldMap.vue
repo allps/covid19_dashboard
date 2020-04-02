@@ -252,8 +252,8 @@
                 let data = {
                     country: this.$data.country_names[countryId] ? this.$data.country_names[countryId] : document.getElementById(countryId).getAttribute('title'),
                     confirmed: this.$data.confirmed_cases[countryId] ? this.$data.confirmed_cases[countryId] : 0,
-                    recovered: this.$data.recovered_cases[countryId]  ? this.$data.confirmed_cases[countryId] : 0,
-                    deaths: this.$data.deaths_cases[countryId]  ? this.$data.confirmed_cases[countryId] : 0
+                    recovered: this.$data.recovered_cases[countryId]  ? this.$data.recovered_cases[countryId] : 0,
+                    deaths: this.$data.deaths_cases[countryId]  ? this.$data.deaths_cases[countryId] : 0
                 };
 
                 let tooltip = document.getElementById("tooltip");
