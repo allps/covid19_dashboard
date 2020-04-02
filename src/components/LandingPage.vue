@@ -1,6 +1,6 @@
 <template>
     <div>
-        <nav-bar></nav-bar>
+        <main-navbar></main-navbar>
         <section class="section pt0">
             <h1 class="title has-text-centered">
                 Novel Corona Virus (COVID-19) Statistics
@@ -74,7 +74,6 @@
 <script>
 
     import axios from "axios";
-    const lazy = () => import('./Navbar.vue');
 
     export default {
         name: 'LandingPage',
@@ -84,7 +83,7 @@
             AllCasesPieCharts: () => import('./AllCasesPieCharts'),
             CountryWiseMortalityRate: () => import('./CountryWiseMortalityRate'),
             StackedLargeScaleAreaChart: () => import('./StackedLargeScaleAreaChart'),
-            'nav-bar': lazy
+            MainNavbar: () => import('./MainNavbar.vue')
         },
         data() {
             return {

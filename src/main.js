@@ -17,6 +17,13 @@ const router = new VueRouter({
                 return import('./components/LandingPage')
             }
         },
+      {
+        name: 'About Covid-19',
+        path: "/about",
+        component: () => {
+          return import('./components/AboutCovid19')
+        }
+      },
         {
             name: 'Page Not Found',
             path: "*",
