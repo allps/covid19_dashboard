@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import axios from 'axios'
 import VueRouter from 'vue-router';
+import Buefy from 'buefy'
 
 require('./assets/sass/main.scss');
 Vue.config.productionTip = false;
@@ -43,13 +44,15 @@ const router = new VueRouter({
     ]
 });
 
-
+Vue.use(Buefy)
 window.echarts = require('echarts/dist/echarts.js');
 
 // eslint-disable-next-line no-undef
 Vue.use(echarts);
 window.axios = axios;
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
+
+
 
 //google analytics
 import VueGtag from "vue-gtag";

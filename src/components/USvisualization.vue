@@ -47,12 +47,37 @@
 
         <section>
             <div class="container">
-                <div class="visualization-wrapper box mb8">
+                <div class="visualization-wrapper box mb2">
                     <h2 class="subtitle has-text-centered">
                         State wise analysis(Infected and death cases)
                     </h2>
                     <div id="bar" style="height: 800px"></div>
 
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <div class=" box mb8">
+                    <h2 class="subtitle has-text-centered">
+                        State wise analysis(Infected and death cases)
+                    </h2>
+                    <div >
+                        <b-table class="table-padding table is-bordered is-striped is-narrow is-hoverable is-fullwidth"
+                                 v-if="states_array"
+                                 :data= "states_array"
+                                 >
+
+                            <template slot-scope="props" >
+                                <b-table-column class="table-padding2" field="name" label="Name" >{{props.row.name}}</b-table-column>
+                                <b-table-column class="table-padding2" field="confirmed" label="Infected" >{{props.row.confirmed[0]}}</b-table-column>
+                                <b-table-column class="table-padding2" field="deaths" label="Deaths" >{{props.row.deaths[0]}}</b-table-column>
+
+                            </template>
+
+                        </b-table>
+                    </div>
                 </div>
             </div>
         </section>
@@ -73,7 +98,9 @@
         data() {
             return {
                   totalConfirmedCases: '',
-                  totalDeathCases: ''
+                  totalDeathCases: '',
+                  last_updated: '',
+                  states_array: '',
             }
         },
 
@@ -87,6 +114,7 @@
 
             this.fetchData();
             this.drawBarGraph();
+            this.drawTable();
         },
 
         methods: {
@@ -240,6 +268,16 @@
                 })
             },
 
+            drawTable(){
+                this.axiosInstance.get("/us-data/for-table")
+                    .then(response => {
+                        this.$data.states_array = response.data.data;
+                        this.$data.last_updated = response.data.created_at;
+                    }).catch(error => {
+                    console.log(error.response.data)
+                })
+            },
+
         }
     }
 </script>
@@ -258,4 +296,12 @@
             border-right: none
         }
     }
+    .table-padding{
+        text-align: center!important;
+    }
+    .table-padding2{
+        padding: 10px;
+
+    }
+
 </style>
