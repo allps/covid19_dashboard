@@ -33,7 +33,7 @@
                 const myChart = window.echarts.init(document.getElementsByClassName("AllCasesPieCharts")[0]);
 
                 myChart.setOption({
-                    color: ['#f14668','#48c774', '#3298dc'],
+                    color: ['#f14668', '#3298dc', '#48c774'],
                     title: {
                         left: 'center'
                     },
