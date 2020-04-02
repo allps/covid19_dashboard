@@ -74,21 +74,16 @@
 <script>
 
     import axios from "axios";
-    import StackedLargeScaleAreaChart from "./StackedLargeScaleAreaChart";
-    import CountryWiseMortalityRate from "./CountryWiseMortalityRate";
-    import AllCasesPieCharts from "./AllCasesPieCharts";
-    import WorldMap from "./maps/WorldMap";
-    import MainFooter from "./MainFooter";
     const lazy = () => import('./Navbar.vue');
 
     export default {
         name: 'LandingPage',
         components:{
-            MainFooter,
-            WorldMap,
-            AllCasesPieCharts,
-            CountryWiseMortalityRate,
-            StackedLargeScaleAreaChart,
+            MainFooter: () => import('./MainFooter'),
+            WorldMap: () => import('./maps/WorldMap'),
+            AllCasesPieCharts: () => import('./AllCasesPieCharts'),
+            CountryWiseMortalityRate: () => import('./CountryWiseMortalityRate'),
+            StackedLargeScaleAreaChart: () => import('./StackedLargeScaleAreaChart'),
             'nav-bar': lazy
         },
         data() {
