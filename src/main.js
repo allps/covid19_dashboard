@@ -30,7 +30,16 @@ const router = new VueRouter({
             component: () => {
                 return import('./components/LandingPage')
             }
-        }
+        },
+
+        {
+            name: 'US Visualization',
+            path: "/us-visualization",
+            component: () => {
+                return import('./components/USvisualization')
+            }
+        },
+
     ]
 });
 
