@@ -59,8 +59,34 @@
                     <h2 class="subtitle has-text-centered">
                         State wise analysis
                     </h2>
-                    <div id="bar" style="height: 800px"></div>
+                    <div id="bar" style="height: 1000px"></div>
 
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <div class="visualization-wrapper box mb8">
+                    <h2 class="subtitle has-text-centered">
+                        State wise analysis(Infected, Discharged and death cases)
+                    </h2>
+                    <div >
+                        <b-table class="table-padding table is-bordered is-striped is-narrow is-hoverable is-fullwidth"
+                                 v-if="details"
+                                 :data= "details"
+                        >
+
+                            <template slot-scope="props" >
+                                <b-table-column class="table-padding2" field="name" label="States" >{{props.row.loc}}</b-table-column>
+                                <b-table-column class="table-padding2" field="confirmed" label="Infected" >{{props.row.confirmedCasesIndian}}</b-table-column>
+                                <b-table-column class="table-padding2" field="Discharged" label="Discharged" >{{props.row.discharged}}</b-table-column>
+                                <b-table-column class="table-padding2" field="deaths" label="Deaths" >{{props.row.deaths}}</b-table-column>
+
+                            </template>
+
+                        </b-table>
+                    </div>
                 </div>
             </div>
         </section>
@@ -82,7 +108,8 @@
             return {
                 'totalConfirmedCases': '',
                 'totalRecoveredCases': '',
-                'totalDeathCases': ''
+                'totalDeathCases': '',
+                'details': []
             }
         },
         mounted(){
@@ -94,6 +121,7 @@
             });
             this.fetchDataDayWise();
             this.drawBarGraph();
+            this.fetchDataForTable();
         },
         methods:{
             withCommas(number){
@@ -303,7 +331,19 @@
                     }).catch(error => {
                     console.log(error.response.data)
                 })
-            }
+            },
+
+            fetchDataForTable(){
+                this.axiosInstance.get('/india-data/for-table')
+                .then(response =>{
+                    console.log(response.data);
+                    this.$data.details = response.data.data.regional;
+
+                }).catch(error=>{
+                    console.log(error.response.data)
+                })
+            },
+
         }
     }
 </script>
@@ -321,5 +361,12 @@
         .main-stats .column{
             border-right: none
         }
+    }
+    .table-padding{
+        text-align: center!important;
+    }
+    .table-padding2{
+        padding: 10px;
+
     }
 </style>
