@@ -42,6 +42,13 @@ const router = new VueRouter({
                 return import('./components/USvisualization')
             }
         },
+        {
+            name: 'India Visualization',
+            path: "/india-visualization",
+            component: () => {
+                return import('./components/IndiaVisualization')
+            }
+        },
 
     ]
 });
