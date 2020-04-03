@@ -131,24 +131,22 @@
             fetchDataDayWise(){
                 this.axiosInstance.get("/india-data/day-wise")
                     .then(response => {
-                       var confirmed = response.data.total.data;
-                       var deaths = response.data.deaths.data;
-                       var recovered = response.data.discharged.data;
-                       var dates = response.data.date.data;
+                        console.log(response.data)
+                        var detailed_data = response.data.data;
 
-                        var finalArray = dates.map(function (obj) {
+                        var finalArray = detailed_data.map(function (obj) {
                             return obj.day;
                         });
 
-                        var finalArray2 = confirmed.map(function (obj) {
-                            return obj.summary.total;
+                        var finalArray2 = detailed_data.map(function (obj) {
+                            return obj.summary.confirmedCasesIndian;
                         });
 
-                        var finalArray3 = recovered.map(function (obj) {
+                        var finalArray3 = detailed_data.map(function (obj) {
                             return obj.summary.discharged;
                         });
 
-                        var finalArray4 = deaths.map(function (obj) {
+                        var finalArray4 = detailed_data.map(function (obj) {
                             return obj.summary.deaths;
                         });
 
@@ -254,7 +252,7 @@
             drawBarGraph(){
                 this.axiosInstance.get("/india-data/for-table")
                     .then(response => {
-                        console.log(response.data)
+                        console.log(response.data);
                         var detail_data_array = response.data.data.regional;
 
                         var finalArray = detail_data_array .map(function (obj) {
