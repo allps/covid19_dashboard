@@ -70,7 +70,7 @@
                                  >
 
                             <template slot-scope="props" >
-                                <b-table-column class="table-padding2" field="name" label="Name" >{{props.row.name}}</b-table-column>
+                                <b-table-column class="table-padding2" field="name" label="States" >{{props.row.name}}</b-table-column>
                                 <b-table-column class="table-padding2" field="confirmed" label="Infected" >{{props.row.confirmed[0]}}</b-table-column>
                                 <b-table-column class="table-padding2" field="deaths" label="Deaths" >{{props.row.deaths[0]}}</b-table-column>
 
