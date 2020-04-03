@@ -3,6 +3,7 @@
 // Import a Google Font
 @import url('https://fonts.googleapis.com/css?family=Nunito');
 
+
 // Set your brand colors
 $grey-color: #7d7d7d;
 $svg-map-border-hover-color: #282c34;
@@ -25,6 +26,8 @@ $control-border-width: 2px;
 $input-border-color: transparent;
 $input-shadow: none;
 
+
+
 // Import only what you need from Bulma
 @import "node_modules/bulma/sass/utilities/_all.sass";
 @import "node_modules/bulma/sass/base/_all.sass";
@@ -39,6 +42,8 @@ $input-shadow: none;
 @import "node_modules/bulma/sass/layout/footer";
 
 @import url('https://fonts.googleapis.com/css?family=Nunito+Sans:300,400,700,800&display=swap');
+//@import 'node_modules/buefy/src/scss/buefy';
+
 
 /**********************MARGINS******************/
 .mb2{

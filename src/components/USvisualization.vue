@@ -51,7 +51,7 @@
                     <h2 class="subtitle has-text-centered">
                         State wise analysis(Infected and death cases)
                     </h2>
-                    <div id="bar" style="height: 800px"></div>
+                    <div id="bar" style="height: 1500px"></div>
 
                 </div>
             </div>
@@ -59,7 +59,7 @@
 
         <section>
             <div class="container">
-                <div class=" box mb8">
+                <div class="visualization-wrapper box mb8">
                     <h2 class="subtitle has-text-centered">
                         State wise analysis(Infected and death cases)
                     </h2>
