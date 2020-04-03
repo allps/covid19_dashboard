@@ -252,27 +252,24 @@
             },
 
             drawBarGraph(){
-                this.axiosInstance.get("/india-data/state-wise")
+                this.axiosInstance.get("/india-data/for-table")
                     .then(response => {
                         console.log(response.data)
-                        var confirmed = response.data.total.data.regional;
-                        var deaths = response.data.deaths.data.regional;
-                        var recovered = response.data.discharged.data.regional;
-                        var states = response.data.states.data.regional;
+                        var detail_data_array = response.data.data.regional;
 
-                        var finalArray = states.map(function (obj) {
+                        var finalArray = detail_data_array .map(function (obj) {
                             return obj.loc;
                         });
 
-                        var finalArray2 = confirmed.map(function (obj) {
+                        var finalArray2 = detail_data_array .map(function (obj) {
                             return obj.confirmedCasesIndian;
                         });
 
-                        var finalArray3 = recovered.map(function (obj) {
+                        var finalArray3 = detail_data_array .map(function (obj) {
                             return obj.discharged;
                         });
 
-                        var finalArray4 = deaths.map(function (obj) {
+                        var finalArray4 = detail_data_array .map(function (obj) {
                             return obj.deaths;
                         });
 
