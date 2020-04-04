@@ -212,11 +212,11 @@
         name: "WorldMap",
         data(){
             return {
+                statsShown: 'confirmed',
                 color_swatch:{
                     confirmed: ['#eff3ff','#bdd7e7','#6baed6','#3182bd','#08519c'],
                     recovered: ['#edf8e9','#bae4b3','#74c476','#31a354','#006d2c'],
                     deaths: ['#f1eef6','#d7b5d8','#df65b0','#dd1c77','#980043'],
-                    statsShown: 'confirmed'
                 },
                 country_data: {},
                 confirmed_cases:{},

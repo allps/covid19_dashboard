@@ -5,12 +5,12 @@
             <h1 class="title has-text-centered">
                 Novel Corona Virus (COVID-19) Statistics India
             </h1>
-            <!--            <h2 class="subtitle has-text-centered mb2">-->
-            <!--                Last updated: {{lastUpdatedTime}} ({{hoursAgo}})-->
-            <!--            </h2>-->
-            <!--            <div class="visualization-wrapper">-->
-            <!--                <world-map></world-map>-->
-            <!--            </div>-->
+                <h2 class="subtitle has-text-centered mb2">
+                    Last updated: {{lastUpdatedTime}} ({{hoursAgo}})
+                </h2>
+                <div class="visualization-wrapper">
+                    <india-map></india-map>
+                </div>
             <div class="columns has-text-centered main-stats">
                 <div class="column">
                     <p class="title is-size-4">
@@ -45,7 +45,7 @@
             <div class="container">
                 <div class="visualization-wrapper box mb2">
                     <h2 class="subtitle has-text-centered">
-                        Number of infected, discharged and death cases over time.
+                        Number of infected, recovered and death cases over time.
                     </h2>
                     <div class="StackedLargeScaleAreaChart" style="height: 400px"></div>
 
@@ -98,18 +98,22 @@
 
 <script>
     import axios from "axios";
+    import {timeDifferenceForHumans} from '@/utils/utils.js'
     export default {
         name: "IndiaVisualization.vue",
         components:{
-            MainFooter: () => import('./MainFooter'),
-            MainNavbar: () => import('./MainNavbar.vue')
+            MainFooter: () => import('../MainFooter'),
+            MainNavbar: () => import('../MainNavbar.vue'),
+            IndiaMap: () => import('../maps/IndiaMap')
         },
         data(){
             return {
                 'totalConfirmedCases': '',
                 'totalRecoveredCases': '',
                 'totalDeathCases': '',
-                'details': []
+                'details': [],
+                lastUpdatedTime: '',
+                hoursAgo: ''
             }
         },
         mounted(){
@@ -121,7 +125,7 @@
             });
             this.fetchDataDayWise();
             this.drawBarGraph();
-            this.fetchDataForTable();
+            this.fetchStateWiseData();
         },
         methods:{
             withCommas(number){
@@ -131,22 +135,21 @@
             fetchDataDayWise(){
                 this.axiosInstance.get("/india-data/day-wise")
                     .then(response => {
-                        console.log(response.data)
-                        var detailed_data = response.data.data;
+                        let detailed_data = response.data.data;
 
-                        var finalArray = detailed_data.map(function (obj) {
+                        let finalArray = detailed_data.map(function (obj) {
                             return obj.day;
                         });
 
-                        var finalArray2 = detailed_data.map(function (obj) {
+                        let finalArray2 = detailed_data.map(function (obj) {
                             return obj.summary.confirmedCasesIndian;
                         });
 
-                        var finalArray3 = detailed_data.map(function (obj) {
+                        let finalArray3 = detailed_data.map(function (obj) {
                             return obj.summary.discharged;
                         });
 
-                        var finalArray4 = detailed_data.map(function (obj) {
+                        let finalArray4 = detailed_data.map(function (obj) {
                             return obj.summary.deaths;
                         });
 
@@ -155,6 +158,8 @@
                         this.$data.totalConfirmedCases = finalArray2[finalArray2.length - 1];
                         this.$data.totalRecoveredCases = finalArray3[finalArray2.length - 1];
                         this.$data.totalDeathCases = finalArray4[finalArray2.length - 1];
+                        this.$data.lastUpdatedTime = (new Date(response.data.lastRefreshed)).toDateString();
+                        this.$data.hoursAgo = timeDifferenceForHumans((new Date().getTime()), (new Date(response.data.lastRefreshed)).getTime());
 
 
                     }).catch(error => {
@@ -250,9 +255,8 @@
             },
 
             drawBarGraph(){
-                this.axiosInstance.get("/india-data/for-table")
+                this.axiosInstance.get("/data/india/state-wise")
                     .then(response => {
-                        console.log(response.data);
                         var detail_data_array = response.data.data.regional;
 
                         var finalArray = detail_data_array .map(function (obj) {
@@ -328,10 +332,9 @@
                 })
             },
 
-            fetchDataForTable(){
-                this.axiosInstance.get('/india-data/for-table')
+            fetchStateWiseData(){
+                this.axiosInstance.get('/data/india/state-wise')
                 .then(response =>{
-                    console.log(response.data);
                     this.$data.details = response.data.data.regional;
 
                 }).catch(error=>{

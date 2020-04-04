@@ -12,8 +12,13 @@
                     <span aria-hidden="true"></span>
                 </a>
             </div>
-
             <div :class="{ 'is-active': showNav }" class="navbar-menu">
+                <div class="navbar-start">
+                    <a href="/covid19-information" class="navbar-item">
+                        Covid-19 Information
+                    </a>
+                </div>
+
 
                 <div class="navbar-end">
                     <div class="navbar-item">

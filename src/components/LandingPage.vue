@@ -74,6 +74,7 @@
 <script>
 
     import axios from "axios";
+    import {timeDifferenceForHumans, withCommas} from '@/utils/utils.js'
 
     export default {
         name: 'LandingPage',
@@ -111,9 +112,7 @@
 
 
         methods: {
-            withCommas(number){
-                return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-            },
+            withCommas,
 
             totalNumberCases() {
                 this.$data.totalCases = this.$data.confirmedCases + this.$data.recoveredCases + this.$data.deathCases;
@@ -127,47 +126,12 @@
                         this.$data.deathCases = response.data.deaths;
                         this.$data.totalCountriesAffected = response.data.totalCountries;
                         this.$data.lastUpdatedTime = (new Date(parseInt(response.data.created_at) * 1000)).toDateString();
-                        this.$data.hoursAgo = this.timeDifferenceForHumans((new Date().getTime()), (new Date(parseInt(response.data.created_at) * 1000)))
+                        this.$data.hoursAgo = timeDifferenceForHumans((new Date().getTime()), (new Date(parseInt(response.data.created_at) * 1000)))
 
                     }).catch(error => {
                     console.log(error.response)
                 })
             },
-
-            timeDifferenceForHumans(current, previous) {
-
-                let msPerMinute = 60 * 1000;
-                let msPerHour = msPerMinute * 60;
-                let msPerDay = msPerHour * 24;
-                let msPerMonth = msPerDay * 30;
-                let msPerYear = msPerDay * 365;
-
-                let elapsed = current - previous;
-
-                if (elapsed < msPerMinute) {
-                    return Math.round(elapsed/1000) + ' seconds ago';
-                }
-
-                else if (elapsed < msPerHour) {
-                    return Math.round(elapsed/msPerMinute) + ' minutes ago';
-                }
-
-                else if (elapsed < msPerDay ) {
-                    return Math.round(elapsed/msPerHour ) + ' hours ago';
-                }
-
-                else if (elapsed < msPerMonth) {
-                    return 'approximately ' + Math.round(elapsed/msPerDay) + ' days ago';
-                }
-
-                else if (elapsed < msPerYear) {
-                    return 'approximately ' + Math.round(elapsed/msPerMonth) + ' months ago';
-                }
-
-                else {
-                    return 'approximately ' + Math.round(elapsed/msPerYear ) + ' years ago';
-                }
-            }
 
         }
     }

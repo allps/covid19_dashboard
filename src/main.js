@@ -20,18 +20,18 @@ const router = new VueRouter({
                 return import('./components/LandingPage')
             }
         },
-      {
-        name: 'About Covid-19',
-        path: "/about",
-        component: () => {
-          return import('./components/AboutCovid19')
-        }
-      },
+        {
+            name: 'Covid-19 Information',
+            path: "/covid19-information",
+            component: () => {
+                return import('./components/AboutCovid19')
+            }
+        },
         {
             name: 'Page Not Found',
             path: "*",
             component: () => {
-                return import('./components/LandingPage')
+                return import('./components/PageNotFound')
             }
         },
 
@@ -44,23 +44,22 @@ const router = new VueRouter({
         },
         {
             name: 'India Visualization',
-            path: "/india-visualization",
+            path: "/details/india",
             component: () => {
-                return import('./components/IndiaVisualization')
+                return import('./components/details/India')
             }
         },
 
     ]
 });
 
-Vue.use(Buefy)
+Vue.use(Buefy);
 window.echarts = require('echarts/dist/echarts.js');
 
 // eslint-disable-next-line no-undef
 Vue.use(echarts);
 window.axios = axios;
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
-
 
 
 //google analytics
