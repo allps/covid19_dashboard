@@ -214,9 +214,9 @@
             return {
                 statsShown: 'confirmed',
                 color_swatch:{
-                    confirmed: ['#eff3ff','#bdd7e7','#6baed6','#3182bd','#08519c'],
-                    recovered: ['#edf8e9','#bae4b3','#74c476','#31a354','#006d2c'],
-                    deaths: ['#f1eef6','#d7b5d8','#df65b0','#dd1c77','#980043'],
+                    confirmed: ['#e5f2ff','#b3d7ff','#4da3ff','#1a88ff','#006fe6','#0056b3', '#003d80'],
+                    recovered: ['#c1f0cc','#98e6aa','#6fdd88','#46d366', '#2cb94d', '#22903c', '#19672b'],
+                    deaths: ['#ffe5eb','#ffb3c2','#ff809a','#ff4d71','#ff1a49', '#e6002f', '#b30025'],
                 },
                 country_data: {},
                 confirmed_cases:{},
@@ -345,8 +345,8 @@
                     number_of_cases = 1
                 }
                 let color_index = Math.floor(Math.log(number_of_cases) / Math.LN10 + 0.000000001);
-                if(color_index > 4){
-                    return 4
+                if(color_index > 6){
+                    return 5
                 } else {
                     return color_index
                 }

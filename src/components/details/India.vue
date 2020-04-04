@@ -5,39 +5,40 @@
             <h1 class="title has-text-centered">
                 Novel Corona Virus (COVID-19) Statistics India
             </h1>
-                <h2 class="subtitle has-text-centered mb2">
-                    Last updated: {{lastUpdatedTime}} ({{hoursAgo}})
-                </h2>
-                <div class="visualization-wrapper">
-                    <india-map></india-map>
-                </div>
-            <div class="columns has-text-centered main-stats">
+            <h2 class="subtitle has-text-centered mb2">
+                Last updated: {{lastUpdatedTime}} ({{hoursAgo}})
+            </h2>
+            <div class="columns has-text-centered main-stats mt5 mb4">
                 <div class="column">
-                    <p class="title is-size-4">
+                    <p class="title is-size-4 confirmed-color-light">
                         Infected
                     </p>
-                    <p class="subtitle is-size-3">
+                    <p class="subtitle is-size-3 confirmed-color">
                         {{withCommas(totalConfirmedCases)}}
                     </p>
                 </div>
 
                 <div class="column">
-                    <p class="title is-size-4">
+                    <p class="title is-size-4 recovered-color-light">
                         Recovered
                     </p>
-                    <p class="subtitle is-size-3">
+                    <p class="subtitle is-size-3 recovered-color">
                         {{withCommas(totalRecoveredCases)}}
                     </p>
                 </div>
 
                 <div class="column">
-                    <p class="title is-size-4">
+                    <p class="title is-size-4 deaths-color-light">
                         Deaths
                     </p>
-                    <p class="subtitle is-size-3">
+                    <p class="subtitle is-size-3 deaths-color">
                         {{withCommas(totalDeathCases)}}
                     </p>
                 </div>
+            </div>
+
+            <div class="visualization-wrapper">
+                <india-map></india-map>
             </div>
         </section>
 
@@ -71,17 +72,24 @@
                     <h2 class="subtitle has-text-centered">
                         State wise analysis(Infected, Discharged and death cases)
                     </h2>
-                    <div >
+                    <div>
                         <b-table class="table-padding table is-bordered is-striped is-narrow is-hoverable is-fullwidth"
                                  v-if="details"
-                                 :data= "details"
+                                 :data="details"
                         >
 
-                            <template slot-scope="props" >
-                                <b-table-column class="table-padding2" field="name" label="States" >{{props.row.loc}}</b-table-column>
-                                <b-table-column class="table-padding2" field="confirmed" label="Infected" >{{props.row.confirmedCasesIndian}}</b-table-column>
-                                <b-table-column class="table-padding2" field="Discharged" label="Discharged" >{{props.row.discharged}}</b-table-column>
-                                <b-table-column class="table-padding2" field="deaths" label="Deaths" >{{props.row.deaths}}</b-table-column>
+                            <template slot-scope="props">
+                                <b-table-column class="table-padding2" field="name" label="States">{{props.row.loc}}
+                                </b-table-column>
+                                <b-table-column class="table-padding2" field="confirmed" label="Infected">
+                                    {{props.row.confirmedCasesIndian}}
+                                </b-table-column>
+                                <b-table-column class="table-padding2" field="Discharged" label="Discharged">
+                                    {{props.row.discharged}}
+                                </b-table-column>
+                                <b-table-column class="table-padding2" field="deaths" label="Deaths">
+                                    {{props.row.deaths}}
+                                </b-table-column>
 
                             </template>
 

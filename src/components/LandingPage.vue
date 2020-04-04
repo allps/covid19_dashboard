@@ -8,34 +8,34 @@
             <h2 class="subtitle has-text-centered mb2">
                 Last updated: {{lastUpdatedTime}} ({{hoursAgo}})
             </h2>
-            <div class="visualization-wrapper">
-                <world-map></world-map>
-            </div>
-            <div class="columns has-text-centered main-stats">
+            <div class="columns has-text-centered main-stats mt5 mb4">
                 <div class="column">
-                    <p class="title is-size-4">
+                    <p class="title is-size-4 confirmed-color-light">
                         Infected
                     </p>
-                    <p class="subtitle is-size-3">
+                    <p class="subtitle is-size-3 confirmed-color">
                         {{withCommas(confirmedCases)}}
                     </p>
                 </div>
                 <div class="column">
-                    <p class="title is-size-4">
+                    <p class="title is-size-4 recovered-color-light">
                         Recovered
                     </p>
-                    <p class="subtitle is-size-3">
+                    <p class="subtitle is-size-3 recovered-color">
                         {{withCommas(recoveredCases)}}
                     </p>
                 </div>
                 <div class="column">
-                    <p class="title is-size-4">
+                    <p class="title is-size-4 deaths-color-light">
                         Deaths
                     </p>
-                    <p class="subtitle is-size-3">
+                    <p class="subtitle is-size-3 deaths-color">
                         {{withCommas(deathCases)}}
                     </p>
                 </div>
+            </div>
+            <div class="visualization-wrapper">
+                <world-map></world-map>
             </div>
         </section>
         <section class="section">

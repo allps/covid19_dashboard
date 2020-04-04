@@ -14,6 +14,23 @@
             </div>
             <div :class="{ 'is-active': showNav }" class="navbar-menu">
                 <div class="navbar-start">
+
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                            Show Details For
+                        </a>
+
+                        <div class="navbar-dropdown">
+                            <a href="/details/india" class="navbar-item">
+                                India
+                            </a>
+                            <hr class="navbar-divider">
+                            <a href="/" class="navbar-item">
+                                Worlwide
+                            </a>
+                        </div>
+                    </div>
+
                     <a href="/covid19-information" class="navbar-item">
                         Covid-19 Information
                     </a>
@@ -41,11 +58,15 @@
     export default {
         name: "Navbar",
         data(){
-            return {showNav: false}
+            return {
+                showNav: false
+            }
         }
     }
 </script>
 
 <style scoped>
-
+    .navbar{
+        padding-bottom: 0
+    }
 </style>

@@ -9,9 +9,9 @@ $grey-color: #7d7d7d;
 $svg-map-border-hover-color: #282c34;
 $black-color: #000;
 $brown: #4c4c4c;
-$green: #00d1b2;
-$red: #f14668;
-$blue: #08519c;
+$green: #28a745;
+$red: #ff073a;
+$blue: #007bff;
 
 // Update Bulma's global variables
 $family-sans-serif: "Nunito", sans-serif;
@@ -84,12 +84,24 @@ $input-shadow: none;
   color: $blue !important
 }
 
+.confirmed-color-light{
+  color: rgba(0,123,255,.6) !important
+}
+
 .recovered-color{
   color: $green !important
 }
 
+.recovered-color-light{
+  color: rgba(40,167,69,.6) !important
+}
+
 .deaths-color{
   color: $red !important
+}
+
+.deaths-color-light{
+  color: rgba(255,7,58,.6) !important
 }
 
 .case-type-selector {
