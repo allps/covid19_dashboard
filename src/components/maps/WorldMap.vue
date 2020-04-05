@@ -3,7 +3,7 @@
         <p class="tooltiptext" id="tooltip"></p>
         <div class="map-container">
             <div class="has-text-centered is-size-6 mb3 has-text-weight-bold">
-            <div class="select">
+                <div class="select">
                 <div class="field is-horizontal">
                     <div class="field-body">
                         <div class="field is-narrow">

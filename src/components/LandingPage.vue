@@ -38,30 +38,57 @@
                 <world-map></world-map>
             </div>
         </section>
+
+        <div class="has-text-centered is-size-6 mb3 has-text-weight-bold">
+            <span class="is-size-4 mr1">Showing data for:</span>
+            <div class="select">
+                <div class="field is-horizontal">
+                    <div class="field-body">
+                        <div class="field is-narrow">
+                            <div class="control">
+                                <div class="select is-fullwidth">
+                                    <select @change="showStatsForCountry(countryShown)" v-model="countryShown" ref="selectedItem">
+                                        <option value="worldwide" selected>Worldwide</option>
+                                        <option v-for="country in countryList" :value="country">{{country}}</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <section class="section">
             <div class="container">
-                <div class="visualization-wrapper box">
-                    <h2 class="subtitle has-text-centered">
-                        Number of infected recovered and death cases over time.
-                    </h2>
-                    <stacked-large-scale-area-chart></stacked-large-scale-area-chart>
-                </div>
+                <div v-show="countryShown === 'worldwide'">
+                    <div class="visualization-wrapper box">
+                        <stacked-large-scale-area-chart></stacked-large-scale-area-chart>
+                    </div>
 
-                <div class="visualization-wrapper box">
-                    <h2 class="subtitle has-text-centered">
-                        Country wise mortality and recovery rates
-                    </h2>
-                    <p class="has-text-centered">
-                        (Showing for countries having confirmed cases 1000 or more.)
-                    </p>
-                    <country-wise-mortality-rate></country-wise-mortality-rate>
-                </div>
+                    <div class="visualization-wrapper box">
+                        <h2 class="subtitle has-text-centered">
+                            Country wise mortality and recovery rates
+                        </h2>
+                        <p class="has-text-centered">
+                            (Showing for countries having confirmed cases 1000 or more.)
+                        </p>
+                        <country-wise-mortality-rate></country-wise-mortality-rate>
+                    </div>
 
-                <div class="visualization-wrapper box">
-                    <h2 class="subtitle has-text-centered">
-                        Comparision of infected, deaths and recovered globally
-                    </h2>
-                    <all-cases-pie-charts></all-cases-pie-charts>
+                    <div class="visualization-wrapper box">
+                        <h2 class="subtitle has-text-centered">
+                            Comparision of infected, deaths and recovered globally
+                        </h2>
+                        <all-cases-pie-charts></all-cases-pie-charts>
+                    </div>
+                </div>
+                <div v-if="countryShown !== 'worldwide'">
+                    <generic-country-view
+                            v-bind:confirmedCaseList = "getCountrySpecificTimeSeriesData(countryShown, 'confirmed')"
+                            v-bind:recoveredCaseList = "getCountrySpecificTimeSeriesData(countryShown, 'recovered')"
+                            v-bind:deathsCaseList = "getCountrySpecificTimeSeriesData(countryShown, 'deaths')"
+                            v-bind:countryName = "countryShown">
+                    </generic-country-view>
                 </div>
             </div>
         </section>
@@ -75,26 +102,34 @@
 
     import axios from "axios";
     import {timeDifferenceForHumans, withCommas} from '@/utils/utils.js'
-
     export default {
         name: 'LandingPage',
         components:{
+            MainNavbar: () => import('./MainNavbar.vue'),
             MainFooter: () => import('./MainFooter'),
             WorldMap: () => import('./maps/WorldMap'),
             AllCasesPieCharts: () => import('./AllCasesPieCharts'),
             CountryWiseMortalityRate: () => import('./CountryWiseMortalityRate'),
             StackedLargeScaleAreaChart: () => import('./StackedLargeScaleAreaChart'),
-            MainNavbar: () => import('./MainNavbar.vue')
+            GenericCountryView: () => import('./GenericCountryView'),
+
         },
         data() {
             return {
+                countryShown: 'worldwide',
                 lastUpdatedTime: '',
                 hoursAgo: '6',
                 totalCases: '',
                 confirmedCases: '',
                 recoveredCases: '',
                 deathCases: '',
-                totalCountriesAffected: ''
+                totalCountriesAffected: '',
+                countryWise: {
+                    confirmed: [],
+                    recovered: [],
+                    deaths: [],
+                },
+                countryList: []
             }
         },
 
@@ -107,11 +142,36 @@
             });
             this.totalCasesWorld();
             this.totalNumberCases();
-            // this.drawWorldMap();
+            this.fetchCountryWiseTimeSeries();
         },
 
 
         methods: {
+
+            fetchCountryWiseTimeSeries() {
+                let self = this;
+                ['confirmed', 'recovered', 'deaths'].forEach(stat_type => {
+                    this.axiosInstance.get('/country/time-series/' + stat_type)
+                        .then(response => {
+                            self.$data.countryWise[stat_type] = response.data.data
+
+                            if(stat_type === 'confirmed') {
+                                self.$data.countryWise[stat_type].forEach(country => {
+                                    self.$data.countryList.push(country.country)
+                                })
+                            }
+                        }).catch(error => {console.log(error)})
+                });
+            },
+
+            getCountrySpecificTimeSeriesData(countryName, stat){
+                let index = this.$data.countryWise[stat].findIndex(countryData => {
+                    return countryData.country === countryName
+                });
+
+                return this.$data.countryWise[stat][index];
+            },
+
             withCommas,
 
             totalNumberCases() {
@@ -133,23 +193,15 @@
                 })
             },
 
+            showStatsForCountry(country){
+
+            }
+
         }
     }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-    .main-stats .column{
-        border-right: 1px solid rgba(0, 0, 0, 0.2)
-    }
 
-    .main-stats .column:last-child{
-        border-right: none
-    }
-
-    @media only screen and (max-width: 430px) {
-        .main-stats .column{
-            border-right: none
-        }
-    }
 </style>

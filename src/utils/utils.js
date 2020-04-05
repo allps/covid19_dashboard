@@ -34,6 +34,10 @@ function timeDifferenceForHumans(current, previous) {
     }
 }
 
+function dateForHumans(datestr){
+
+}
+
 function withCommas(number){
     return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
@@ -58,7 +62,17 @@ function deathsColor() {
     return '#ff073a'
 }
 
+function capitalizeFirstLetter(s){
+    if (typeof s !== 'string') return '';
+    return (s.toLowerCase()).charAt(0).toUpperCase() + s.slice(1)
+}
+
 module.exports = {
     timeDifferenceForHumans: timeDifferenceForHumans,
-    withCommas: withCommas
+    dateForHumans:dateForHumans,
+    withCommas: withCommas,
+    confirmedColor: confirmedColor,
+    recoveredColor: recoveredColor,
+    deathsColor: deathsColor,
+    capitalizeFirstLetter: capitalizeFirstLetter
 };
