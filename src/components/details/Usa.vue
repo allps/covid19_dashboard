@@ -5,16 +5,13 @@
             <h1 class="title has-text-centered">
                 Novel Corona Virus (COVID-19) Statistics USA
             </h1>
-            <!--            <h2 class="subtitle has-text-centered mb2">-->
-            <!--                Last updated: {{lastUpdatedTime}} ({{hoursAgo}})-->
-            <!--            </h2>-->
-            <!--            <div class="visualization-wrapper">-->
-            <!--                <world-map></world-map>-->
-            <!--            </div>-->
+            <h2 class="subtitle has-text-centered mb2">
+                Last updated: {{last_updated}} ({{hoursAgo}})
+            </h2>
             <div class="columns has-text-centered main-stats">
                 <div class="column">
                     <p class="title is-size-4">
-                        Infected
+                        Confirmed
                     </p>
                     <p class="subtitle is-size-3">
                         {{withCommas(totalConfirmedCases)}}
@@ -102,6 +99,7 @@
 
 <script>
     import axios from "axios";
+    import {timeDifferenceForHumans} from '@/utils/utils.js'
     export default {
         name: "USvisualization",
         components:{
@@ -116,6 +114,7 @@
                 totalDeathCases: '',
                 last_updated: '',
                 states_array: '',
+                hoursAgo: ''
             }
         },
 
@@ -142,7 +141,8 @@
                     .then(response => {
                         this.$data.totalConfirmedCases = response.data.totalConfirmedCases;
                         this.$data.totalDeathCases = response.data.totalDeathCases;
-                        this.drawChart(response.data)
+                        this.drawChart(response.data);
+
                     }).catch(error => {
                     console.log(error.response.data)
                 })
@@ -284,6 +284,9 @@
                     .then(response => {
                         this.$data.states_array = response.data.data;
                         this.$data.last_updated = response.data.created_at;
+
+                        this.$data.last_updated = (new Date(response.data.created_at * 1000 )).toDateString();
+                        this.$data.hoursAgo = timeDifferenceForHumans((new Date().getTime()), (new Date(response.data.created_at * 1000)).getTime());
                     }).catch(error => {
                     console.log(error.response.data)
                 })

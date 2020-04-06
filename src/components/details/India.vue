@@ -11,7 +11,7 @@
             <div class="columns has-text-centered main-stats mt5 mb4">
                 <div class="column">
                     <p class="title is-size-4 confirmed-color-light">
-                        Infected
+                        Confirmed
                     </p>
                     <p class="subtitle is-size-3 confirmed-color">
                         {{withCommas(totalConfirmedCases)}}
