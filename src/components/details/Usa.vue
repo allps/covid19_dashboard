@@ -5,12 +5,12 @@
             <h1 class="title has-text-centered">
                 Novel Corona Virus (COVID-19) Statistics USA
             </h1>
-<!--            <h2 class="subtitle has-text-centered mb2">-->
-<!--                Last updated: {{lastUpdatedTime}} ({{hoursAgo}})-->
-<!--            </h2>-->
-<!--            <div class="visualization-wrapper">-->
-<!--                <world-map></world-map>-->
-<!--            </div>-->
+            <!--            <h2 class="subtitle has-text-centered mb2">-->
+            <!--                Last updated: {{lastUpdatedTime}} ({{hoursAgo}})-->
+            <!--            </h2>-->
+            <!--            <div class="visualization-wrapper">-->
+            <!--                <world-map></world-map>-->
+            <!--            </div>-->
             <div class="columns has-text-centered main-stats">
                 <div class="column">
                     <p class="title is-size-4">
@@ -29,6 +29,9 @@
                         {{withCommas(totalDeathCases)}}
                     </p>
                 </div>
+            </div>
+            <div class="visualization-wrapper">
+                <usa-map v-bind:usaMapData="states_array"></usa-map>
             </div>
         </section>
 
@@ -64,16 +67,27 @@
                         State wise analysis(Infected and death cases)
                     </h2>
                     <div >
-                        <b-table class="table-padding table is-bordered is-striped is-narrow is-hoverable is-fullwidth"
+                        <b-table
                                  v-if="states_array"
-                                 :data= "states_array"
-                                 >
+                                 :hoverable="true"
+                                 :striped="true"
+                                 :narrowed="false"
+                                 :data= "states_array">
 
                             <template slot-scope="props" >
-                                <b-table-column class="table-padding2" field="name" label="States" >{{props.row.name}}</b-table-column>
-                                <b-table-column class="table-padding2" field="confirmed" label="Infected" >{{props.row.confirmed[0]}}</b-table-column>
-                                <b-table-column class="table-padding2" field="deaths" label="Deaths" >{{props.row.deaths[0]}}</b-table-column>
-
+                                <b-table-column :searchable="true" class="table-padding2" field="name" label="States" >
+                                    {{props.row.name}}
+                                </b-table-column>
+                                <b-table-column class="table-padding2" field="confirmed" label="Confirmed Cases" >
+                                    <span class="confirmed-color">
+                                        {{props.row.confirmed[0]}}
+                                    </span>
+                                </b-table-column>
+                                <b-table-column class="table-padding2" field="deaths" label="Deaths" >
+                                    <span class="deaths-color">
+                                        {{props.row.deaths[0]}}
+                                    </span>
+                                </b-table-column>
                             </template>
 
                         </b-table>
@@ -91,16 +105,17 @@
     export default {
         name: "USvisualization",
         components:{
-            MainFooter: () => import('./MainFooter'),
-            MainNavbar: () => import('./MainNavbar.vue')
+            MainFooter: () => import('../MainFooter'),
+            UsaMap: () => import('../maps/UsaMap'),
+            MainNavbar: () => import('../MainNavbar.vue')
         },
 
         data() {
             return {
-                  totalConfirmedCases: '',
-                  totalDeathCases: '',
-                  last_updated: '',
-                  states_array: '',
+                totalConfirmedCases: '',
+                totalDeathCases: '',
+                last_updated: '',
+                states_array: '',
             }
         },
 
@@ -123,7 +138,7 @@
             },
 
             fetchData(){
-                this.axiosInstance.get("/us-data/day-wise")
+                this.axiosInstance.get("/data/usa/day-wise")
                     .then(response => {
                         this.$data.totalConfirmedCases = response.data.totalConfirmedCases;
                         this.$data.totalDeathCases = response.data.totalDeathCases;
@@ -189,7 +204,7 @@
                                 symbol: 'none',
                                 sampling: 'average',
                                 itemStyle: {
-                                    color: '#f14668'
+                                    color: '#ff073a'
                                 },
                                 data: death
                             },
@@ -201,7 +216,7 @@
                                 symbol: 'none',
                                 sampling: 'average',
                                 itemStyle: {
-                                    color: '#3298dc'
+                                    color: '#007bff'
                                 },
                                 data: arr_y
                             },
@@ -212,7 +227,7 @@
             },
 
             drawBarGraph(){
-                this.axiosInstance.get("/us-data/each-state")
+                this.axiosInstance.get("/data/usa/each-state")
                     .then(response => {
                         var state_list = response.data.y_list;
                         var case_list = response.data.case_list;
@@ -220,47 +235,43 @@
 
                         const myChart = window.echarts.init(document.getElementById('bar'));
                         myChart.setOption({
-
-                                // title: {
-                                //     text: 'STATE WISE ANALYSIS',
-                                // },
-                                tooltip: {
-                                    trigger: 'axis',
-                                    axisPointer: {
-                                        type: 'shadow'
-                                    }
+                            tooltip: {
+                                trigger: 'axis',
+                                axisPointer: {
+                                    type: 'shadow'
+                                }
+                            },
+                            legend: {
+                                data: ['Infected People', 'Deaths']
+                            },
+                            grid: {
+                                left: '3%',
+                                right: '4%',
+                                bottom: '3%',
+                                containLabel: true
+                            },
+                            xAxis: {
+                                type: 'value',
+                                boundaryGap: [0, 0.01]
+                            },
+                            yAxis: {
+                                type: 'category',
+                                data: state_list
+                            },
+                            series: [
+                                {
+                                    name: 'Infected People',
+                                    type: 'bar',
+                                    data: case_list,
+                                    color: '#007bff',
                                 },
-                                legend: {
-                                    data: ['Infected People', 'Deaths']
-                                },
-                                grid: {
-                                    left: '3%',
-                                    right: '4%',
-                                    bottom: '3%',
-                                    containLabel: true
-                                },
-                                xAxis: {
-                                    type: 'value',
-                                    boundaryGap: [0, 0.01]
-                                },
-                                yAxis: {
-                                    type: 'category',
-                                    data: state_list
-                                },
-                                series: [
-                                    {
-                                        name: 'Infected People',
-                                        type: 'bar',
-                                        data: case_list,
-                                        color: '#08519c',
-                                    },
-                                    {
-                                        name: 'Deaths',
-                                        type: 'bar',
-                                        data: death_list,
-                                        color: '#f14668'
-                                    }
-                                ]
+                                {
+                                    name: 'Deaths',
+                                    type: 'bar',
+                                    data: death_list,
+                                    color: '#ff073a'
+                                }
+                            ]
                         })
 
                     }).catch(error => {
@@ -269,7 +280,7 @@
             },
 
             drawTable(){
-                this.axiosInstance.get("/us-data/for-table")
+                this.axiosInstance.get("/data/usa/for-table")
                     .then(response => {
                         this.$data.states_array = response.data.data;
                         this.$data.last_updated = response.data.created_at;
@@ -277,7 +288,6 @@
                     console.log(error.response.data)
                 })
             },
-
         }
     }
 </script>

@@ -102,7 +102,7 @@
         methods:{
             withCommas,
             isDetailedInfoAvailable(){
-                let t = ['India'].includes(this.countryName)
+                let t = ['India', 'US'].includes(this.countryName);
                 console.log('&&&&&&&&&&&&&&&&')
                 console.log(t)
                 return t;

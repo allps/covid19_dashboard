@@ -73,22 +73,31 @@
                         State wise analysis(Infected, Discharged and death cases)
                     </h2>
                     <div>
-                        <b-table class="table-padding table is-bordered is-striped is-narrow is-hoverable is-fullwidth"
+                        <b-table class="table-padding"
                                  v-if="details"
-                                 :data="details"
-                        >
+                                 :hoverable="true"
+                                 :striped="true"
+                                 :narrowed="false"
+                                 :data="details">
 
                             <template slot-scope="props">
-                                <b-table-column class="table-padding2" field="name" label="States">{{props.row.loc}}
+                                <b-table-column  class="table-padding2" field="name" label="State">
+                                    {{props.row.loc}}
                                 </b-table-column>
-                                <b-table-column class="table-padding2" field="confirmed" label="Infected">
-                                    {{props.row.confirmedCasesIndian}}
+                                <b-table-column class="table-padding2" field="confirmed" label="Confirmed">
+                                    <span class="confirmed-color">
+                                        {{props.row.confirmedCasesIndian}}
+                                    </span>
                                 </b-table-column>
-                                <b-table-column class="table-padding2" field="Discharged" label="Discharged">
-                                    {{props.row.discharged}}
+                                <b-table-column class="table-padding2" field="Recovered" label="Recovered">
+                                    <span class="recovered-color">
+                                        {{props.row.discharged}}
+                                    </span>
                                 </b-table-column>
                                 <b-table-column class="table-padding2" field="deaths" label="Deaths">
-                                    {{props.row.deaths}}
+                                    <span class="deaths-color">
+                                        {{props.row.deaths}}
+                                    </span>
                                 </b-table-column>
 
                             </template>
@@ -116,10 +125,10 @@
         },
         data(){
             return {
-                'totalConfirmedCases': '',
-                'totalRecoveredCases': '',
-                'totalDeathCases': '',
-                'details': [],
+                totalConfirmedCases: '',
+                totalRecoveredCases: '',
+                totalDeathCases: '',
+                details: [],
                 lastUpdatedTime: '',
                 hoursAgo: ''
             }
@@ -227,7 +236,7 @@
                             symbol: 'none',
                             sampling: 'average',
                             itemStyle: {
-                                color: '#f14668'
+                                color: '#ff073a'
                             },
                             data: death
                         },
@@ -239,7 +248,7 @@
                             symbol: 'none',
                             sampling: 'average',
                             itemStyle: {
-                                color: '#00d1b2'
+                                color: '#28a745'
                             },
                             data: recovered
                         },
@@ -251,7 +260,7 @@
                             symbol: 'none',
                             sampling: 'average',
                             itemStyle: {
-                                color: '#3298dc'
+                                color: '#007bff'
                             },
                             data: confirmed
                         },
@@ -318,19 +327,19 @@
                                     name: 'Infected People',
                                     type: 'bar',
                                     data: finalArray2,
-                                    color: '#08519c',
+                                    color: '#007bff',
                                 },
                                 {
                                     name: 'Discharged',
                                     type: 'bar',
                                     data: finalArray3,
-                                    color: '#00d1b2',
+                                    color: '#28a745',
                                 },
                                 {
                                     name: 'Deaths',
                                     type: 'bar',
                                     data: finalArray4,
-                                    color: '#f14668'
+                                    color: '#ff073a'
                                 }
                             ]
                         })

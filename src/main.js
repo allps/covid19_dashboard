@@ -37,9 +37,9 @@ const router = new VueRouter({
 
         {
             name: 'US Visualization',
-            path: "/us-visualization",
+            path: "/details/us",
             component: () => {
-                return import('./components/USvisualization')
+                return import('./components/details/Usa')
             }
         },
         {

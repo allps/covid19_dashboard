@@ -21,6 +21,9 @@
                         </a>
 
                         <div class="navbar-dropdown">
+                            <a href="/details/usa" class="navbar-item">
+                                USA
+                            </a>
                             <a href="/details/india" class="navbar-item">
                                 India
                             </a>
