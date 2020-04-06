@@ -28,6 +28,13 @@ const router = new VueRouter({
             }
         },
         {
+            name: 'FAQs',
+            path: "/faqs",
+            component: () => {
+                return import('./components/Faqs')
+            }
+        },
+        {
             name: 'Page Not Found',
             path: "*",
             component: () => {

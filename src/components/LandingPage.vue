@@ -90,6 +90,18 @@
                             v-bind:countryName = "countryShown">
                     </generic-country-view>
                 </div>
+
+                <div class="box mb8 mt2">
+                    <h2 class="subtitle has-text-centered">
+                        Data Sources
+                    </h2>
+                    <p class="has-text-centered">
+                        All data shown on this page has been sourced from
+                        <a href="https://github.com/CSSEGISandData/COVID-19" target="_blank">
+                            Novel Coronavirus (COVID-19) Cases, provided by JHU CSSE
+                        </a>
+                    </p>
+                </div>
             </div>
         </section>
 

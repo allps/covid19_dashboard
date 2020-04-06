@@ -68,7 +68,7 @@
 
         <section>
             <div class="container">
-                <div class="visualization-wrapper box mb8">
+                <div class="visualization-wrapper box mb2">
                     <h2 class="subtitle has-text-centered">
                         State wise analysis(Infected, Discharged and death cases)
                     </h2>
@@ -104,6 +104,18 @@
 
                         </b-table>
                     </div>
+                </div>
+
+                <div class="box mb8">
+                    <h2 class="subtitle has-text-centered">
+                        Data Sources
+                    </h2>
+                    <p class="has-text-centered">
+                        All data shown on this page has been sourced from
+                        <a href="https://github.com/amodm/api-covid19-in" target="_blank">
+                            Covid 19 IN
+                        </a>
+                    </p>
                 </div>
             </div>
         </section>

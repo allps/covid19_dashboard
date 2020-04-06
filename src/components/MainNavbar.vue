@@ -33,20 +33,22 @@
                             </a>
                         </div>
                     </div>
-
-                    <a href="/covid19-information" class="navbar-item">
-                        Covid-19 Information
-                    </a>
                 </div>
 
 
                 <div class="navbar-end">
                     <div class="navbar-item">
+                        <a href="/faqs" class="navbar-item">
+                            FAQs
+                        </a>
+                        <a href="/covid19-information" class="navbar-item">
+                            Covid-19 Information
+                        </a>
                         <div class="buttons">
-                            <a href="https://github.com/allps/covid19_analysis/" target="_blank" class="button is-primary is-outlined">
+                            <a href="https://github.com/allps/covid19_analysis/" target="_blank" class="button is-small is-primary is-outlined">
                                 Contribute
                             </a>
-                            <a href="https://github.com/allps/covid19_dashboard/issues/new/" target="_blank" class="button is-light">
+                            <a href="https://github.com/allps/covid19_dashboard/issues/new/" target="_blank" class="button is-small is-link">
                                 Report an Issue
                             </a>
                         </div>
