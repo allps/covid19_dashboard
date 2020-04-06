@@ -71,6 +71,10 @@
 </script>
 
 <style scoped>
+    p{
+        font-size: 1.3rem;
+        line-height: 2rem;
+    }
     img.github-logo{
         width: 1.8rem;
         vertical-align: sub;
