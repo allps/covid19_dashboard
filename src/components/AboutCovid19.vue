@@ -101,12 +101,6 @@
                             nose and mouth
                         </li>
                         <li>
-                            Throw used
-                            tissues into closed
-                            bins immediately
-                            after use
-                        </li>
-                        <li>
                             Spit in public
                         </li>
                     </ol>
