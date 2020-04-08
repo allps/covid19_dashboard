@@ -66,6 +66,48 @@
             </div>
         </section>
 
+        <section>
+            <div class="container">
+                <div class="visualization-wrapper box mb2">
+                    <h2 class="subtitle has-text-centered">
+                        Kanton wise analysis(Infected, recovered and death cases)
+                    </h2>
+                    <div >
+                        <b-table v-if="kantons"
+                                :hoverable="true"
+                                :striped="true"
+                                :narrowed="false"
+                                 :data="kantons"
+                                >
+
+                            <template slot-scope="props">
+                                <b-table-column class="table-padding2" field="name" label="Kantons" >
+                                    {{props.row.kanton}}
+                                </b-table-column>
+                                <b-table-column class="table-padding2" field="confirmed" label="Confirmed Cases" >
+                                    <span class="confirmed-color">
+                                        {{props.row.confirmed}}
+                                    </span>
+                                </b-table-column>
+                                <b-table-column class="table-padding2" field="Recovered" label="Recovered">
+                                    <span class="recovered-color">
+                                        {{props.row.recovered}}
+                                    </span>
+                                </b-table-column>
+                                <b-table-column class="table-padding2" field="deaths" label="Deaths">
+                                    <span class="deaths-color">
+                                        {{props.row.death}}
+                                    </span>
+                                </b-table-column>
+                            </template>
+
+                        </b-table>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
         <main-footer></main-footer>
 
     </div>
@@ -85,7 +127,8 @@
             return{
                 totalConfirmedCases: '',
                 totalRecoveredCases: '',
-                totalDeathCases: ''
+                totalDeathCases: '',
+                kantons: []
             }
         },
         mounted(){
@@ -96,7 +139,8 @@
                 }
             });
             this.fetchDataDayWiseInSwitzerland();
-            this.drawChartKantonWiseConfirmedCases()
+            this.drawChartKantonWiseConfirmedCases();
+            this. drawTable();
         },
 
 
@@ -108,7 +152,6 @@
             fetchDataDayWiseInSwitzerland(){
                 this.axiosInstance.get('/switzerland-data/day-wise')
                 .then(response =>{
-                    console.log(response.data)
                     this.$data.totalConfirmedCases = response.data.confirmedCases.totalConfirmedCases;
                     this.$data.totalRecoveredCases = response.data.recoveredCases.totalRecoveredCases;
                     this.$data.totalDeathCases = response.data.deathCases.totalDeathCases;
@@ -271,7 +314,7 @@
                                         kantonArray[8], kantonArray[9], kantonArray[10], kantonArray[11],
                                         kantonArray[12], kantonArray[13],kantonArray[14],kantonArray[15],
                                         kantonArray[16],kantonArray[17],kantonArray[18],kantonArray[19],kantonArray[20],
-                                        kantonArray[21],kantonArray[22],kantonArray[23],kantonArray[24],kantonArray[25]]
+                                        kantonArray[21],kantonArray[22],kantonArray[23],kantonArray[24],kantonArray[25] ]
                                 },
 
                                 series: [
@@ -524,20 +567,6 @@
                                         },
                                         data: dataArray[25]
                                     },
-                                    {
-                                        name: kantonArray[26],
-                                        type: 'line',
-                                        smooth: true,
-                                        symbol: 'none',
-                                        sampling: 'average',
-                                        itemStyle: {
-                                        },
-                                        data: dataArray[26]
-                                    },
-
-
-
-
                                 ]
 
                             }, true)
@@ -547,6 +576,14 @@
                 })
             },
 
+            drawTable(){
+                this.axiosInstance.get('/switzerland-data/for-table')
+                .then(response =>{
+                    this.$data.kantons = response.data.data;
+                }).catch(error=>{
+                    console.log(error.response.data)
+                })
+            },
         }
     }
 
