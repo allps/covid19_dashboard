@@ -89,21 +89,21 @@
                         DO NOT do the following
                     </h2>
                     <p>
-                    <ol>
-                        <li>
-                            Have a close contact
-                            with anyone, if you’re
-                            experiencing cough
-                            and fever
-                        </li>
-                        <li>
-                            Touch your eyes,
-                            nose and mouth
-                        </li>
-                        <li>
-                            Spit in public
-                        </li>
-                    </ol>
+                        <ol>
+                            <li>
+                                Have a close contact
+                                with anyone, if you’re
+                                experiencing cough
+                                and fever
+                            </li>
+                            <li>
+                                Touch your eyes,
+                                nose and mouth
+                            </li>
+                            <li>
+                                Spit in public
+                            </li>
+                        </ol>
                     </p>
                     <br><br><br>
                     <p>

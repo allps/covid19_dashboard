@@ -24,6 +24,9 @@
                             <a href="/details/us" class="navbar-item">
                                 USA
                             </a>
+                            <a href="/details/switzerland" class="navbar-item">
+                                Switzerland
+                            </a>
                             <a href="/details/india" class="navbar-item">
                                 India
                             </a>

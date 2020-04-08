@@ -56,6 +56,13 @@ const router = new VueRouter({
                 return import('./components/details/India')
             }
         },
+        {
+            name: 'Switzerland Visualization',
+            path: "/details/switzerland",
+            component: () => {
+                return import('./components/details/Switzerland')
+            }
+        },
 
     ]
 });
