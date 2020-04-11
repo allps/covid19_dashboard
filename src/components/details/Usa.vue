@@ -119,7 +119,7 @@
                     <div class="container">
                         <div class="visualization-wrapper box mb2">
                             <h2 class="subtitle has-text-centered">
-                                 Total Death Cases According to Gender
+                                 Total Death Cases due to Covid19
                             </h2>
                             <div id="pieChart" style="height: 400px"></div>
 
@@ -134,9 +134,19 @@
                     <p class="has-text-centered">
                         All data shown on this page has been sourced from
                         <a href="https://github.com/nytimes/covid-19-data" target="_blank">
-                            New York Times Covid-19 Repository
+                            New York Times Covid-19 Repository,
                         </a>
-                    </p>
+                        <br>
+                        <a href="https://www.cdc.gov/nchs/nvss/vsrr/COVID19/index.htm" target="_blank">
+                            Centers for Disease Control and Prevention(CDC)
+                        </a><br><br>
+                    <p>
+                    Note- Data during this period are incomplete because of the lag in time
+                    between when the death occurred and when the death certificate is completed,
+                    submitted to NCHS and processed for reporting purposes. This delay can range from 1 week to 8 weeks or more,
+                    depending on the jurisdiction, age, and cause of death.
+                </p>
+
                 </div>
             </div>
         </section>
