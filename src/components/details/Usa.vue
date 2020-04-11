@@ -353,6 +353,7 @@
                 })
             },
 
+            //method to paint charts.
             drawDemographicBarGraphByAge(){
                 this.axiosInstance.get('https://data.cdc.gov/resource/hc4f-j6nb.json')
                 .then(response=> {
@@ -363,7 +364,7 @@
                     var pneumoniaDeaths = [];
                     for (var i = 0; i < response.data.length; i++){
                         if(response.data[i].group == group){
-                            var indicator = response.data[i].indicator;
+                            var indicator = response.data[i].indicator.replace('&ndash;','-');
                             var covidDeaths = response.data[i].covid_deaths;
                             var pneumonia = response.data[i].pneumonia_and_covid_deaths;
 
