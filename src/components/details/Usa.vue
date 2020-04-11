@@ -91,6 +91,25 @@
                     </div>
                 </div>
 
+                <h1>Demographic Data Analysis</h1>
+                <section>
+                    <div class="container">
+                        <div class="visualization-wrapper box mb2">
+                            <h2 class="subtitle has-text-centered">
+                              <u> Disclaimer</u> <br><br>
+                                <p style="font-size: 15px">Data during this period are incomplete because of the lag in time
+                                    between when the death occurred and when the death certificate is completed,
+                                    submitted to NCHS and processed for reporting purposes. This delay can range from 1 week to 8 weeks
+                                    or more, depending on the jurisdiction, age, and cause of death.
+                                    <br><br>
+                                    Influenza death counts include deaths with pneumonia or COVID-19 also
+                                    listed as a cause of death.
+                                </p>
+
+                            </h2>
+                        </div>
+                    </div>
+                </section>
                 <section>
                     <div class="container">
                         <div class="visualization-wrapper box mb2">
@@ -136,15 +155,11 @@
                         <a href="https://github.com/nytimes/covid-19-data" target="_blank">
                             New York Times Covid-19 Repository,
                         </a>
-                        <br>
+                        <br> And Demographic data taken from -
                         <a href="https://www.cdc.gov/nchs/nvss/vsrr/COVID19/index.htm" target="_blank">
                             Centers for Disease Control and Prevention(CDC)
-                        </a><br><br>
-                    <p>
-                    Note- Data during this period are incomplete because of the lag in time
-                    between when the death occurred and when the death certificate is completed,
-                    submitted to NCHS and processed for reporting purposes. This delay can range from 1 week to 8 weeks
-                    or more, depending on the jurisdiction, age, and cause of death.
+                        </a>
+
                 </p>
 
                 </div>
@@ -362,15 +377,18 @@
                     var indicatorArray = [];
                     var covidDeathsArray = [];
                     var pneumoniaDeaths = [];
+                    var influenzaArray = [];
                     for (var i = 0; i < response.data.length; i++){
                         if(response.data[i].group == group){
                             var indicator = response.data[i].indicator.replace('&ndash;','-');
                             var covidDeaths = response.data[i].covid_deaths;
                             var pneumonia = response.data[i].pneumonia_and_covid_deaths;
+                            var influenza = response.data[i].all_influenza_deaths_j09_j11;
 
                             indicatorArray.push(indicator);
                             covidDeathsArray.push(covidDeaths);
                             pneumoniaDeaths.push(pneumonia);
+                            influenzaArray.push(influenza);
                         }
 
                     }
@@ -383,7 +401,7 @@
                             }
                         },
                         legend: {
-                            data: ['Covid19', 'Pneumonia with Covid19']
+                            data: ['Covid19', 'Pneumonia with Covid19', 'Influenza']
                         },
                         grid: {
                             left: '3%',
@@ -411,6 +429,12 @@
                                 type: 'bar',
                                 data: pneumoniaDeaths,
                                 color: '#f14668'
+                            },
+                            {
+                                name: 'Influenza',
+                                type: 'bar',
+                                data: influenzaArray,
+                                color: '#48c774'
                             }
                         ]
                     })
@@ -428,15 +452,18 @@
                         var indicatorArray = [];
                         var covidDeathsArray = [];
                         var pneumoniaDeaths = [];
+                        var influenzaArray = [];
                         for (var i = 0; i < response.data.length; i++){
                             if(response.data[i].group == group){
                                 var indicator = response.data[i].indicator;
                                 var covidDeaths = response.data[i].covid_deaths;
                                 var pneumonia = response.data[i].pneumonia_and_covid_deaths;
+                                var influenza = response.data[i].all_influenza_deaths_j09_j11;
 
                                 indicatorArray.push(indicator);
                                 covidDeathsArray.push(covidDeaths);
                                 pneumoniaDeaths.push(pneumonia);
+                                influenzaArray.push(influenza);
                             }
 
                         }
@@ -449,7 +476,7 @@
                                 }
                             },
                             legend: {
-                                data: ['Covid19', 'Pneumonia with Covid19']
+                                data: ['Covid19', 'Pneumonia with Covid19', 'Influenza']
                             },
                             grid: {
                                 left: '3%',
@@ -477,6 +504,12 @@
                                     type: 'bar',
                                     data: pneumoniaDeaths,
                                     color: '#f14668'
+                                },
+                                {
+                                    name: 'Influenza',
+                                    type: 'bar',
+                                    data: influenzaArray,
+                                    color: '#48c774'
                                 }
                             ]
                         });
@@ -583,5 +616,9 @@
         padding: 10px;
 
     }
-
+h1{
+    font-size: 30px;
+    text-align: center;
+    padding-bottom: 2rem;
+}
 </style>
