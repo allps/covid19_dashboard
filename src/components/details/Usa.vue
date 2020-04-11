@@ -121,7 +121,7 @@
                             <h2 class="subtitle has-text-centered">
                                  Total Death Cases due to Covid19
                             </h2>
-                            <div id="pieChart" style="height: 400px"></div>
+                            <div id="pieChart" style="height: 500px"></div>
 
                         </div>
                     </div>
@@ -143,8 +143,8 @@
                     <p>
                     Note- Data during this period are incomplete because of the lag in time
                     between when the death occurred and when the death certificate is completed,
-                    submitted to NCHS and processed for reporting purposes. This delay can range from 1 week to 8 weeks or more,
-                    depending on the jurisdiction, age, and cause of death.
+                    submitted to NCHS and processed for reporting purposes. This delay can range from 1 week to 8 weeks
+                    or more, depending on the jurisdiction, age, and cause of death.
                 </p>
 
                 </div>
@@ -495,14 +495,14 @@
                             if(response.data[i].group == group && response.data[i].indicator == indicator){
                                 var covidDeaths = response.data[i].covid_deaths;
                                 var pneumonia = response.data[i].pneumonia_and_covid_deaths;
-
+                                var influenza = response.data[i].all_influenza_deaths_j09_j11;
                             }
                         }
                         console.log(covidDeaths);
                         console.log(pneumonia);
                         const myChart = window.echarts.init(document.getElementById('pieChart'));
                         myChart.setOption({
-                            color: ['#f14668', '#3298dc'],
+                            color: ['#f14668', '#3298dc', '#48c774'],
                             title: {
                                 left: 'center'
                             },
@@ -519,9 +519,9 @@
                             },
 
                             legend: {
-                                bottom: 10,
+                                top: 10,
                                 left: 'center',
-                                data: ['Covid19', 'Pneumonia with Covid19']
+                                data: ['Covid19', 'Pneumonia with Covid19', 'Influenza']
                             },
                             series: [
                                 {
@@ -539,7 +539,8 @@
                                             }
                                         },
                                         {value: covidDeaths, name: 'Covid19'},
-                                        {value: pneumonia, name: 'Pneumonia with Covid19'}
+                                        {value: pneumonia, name: 'Pneumonia with Covid19'},
+                                        {value: influenza, name: 'Influenza'},
                                     ],
                                     emphasis: {
                                         itemStyle: {
