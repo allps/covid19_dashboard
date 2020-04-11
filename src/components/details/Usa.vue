@@ -119,7 +119,7 @@
                     <div class="container">
                         <div class="visualization-wrapper box mb2">
                             <h2 class="subtitle has-text-centered">
-                                Disease wise analysis(Death cases)
+                                 Total Death Cases According to Gender
                             </h2>
                             <div id="pieChart" style="height: 400px"></div>
 
@@ -179,6 +179,7 @@
             this.drawTable();
             this.drawDemographicBarGraphByAge();
             this.drawDemographicBarGraphBySex();
+            this.drawPieChartAccordingSex();
         },
 
         methods: {
@@ -345,7 +346,6 @@
             drawDemographicBarGraphByAge(){
                 this.axiosInstance.get('https://data.cdc.gov/resource/hc4f-j6nb.json')
                 .then(response=> {
-                    console.log(response.data);
                     // eslint-disable-next-line no-empty
                     var group = 'By age';
                     var indicatorArray = [];
@@ -399,7 +399,7 @@
                                 name: 'Pneumonia with Covid19',
                                 type: 'bar',
                                 data: pneumoniaDeaths,
-                                color: '#ff073a'
+                                color: '#f14668'
                             }
                         ]
                     })
@@ -412,7 +412,6 @@
             drawDemographicBarGraphBySex(){
                 this.axiosInstance.get('https://data.cdc.gov/resource/hc4f-j6nb.json')
                     .then(response=> {
-                        console.log(response.data);
                         // eslint-disable-next-line no-empty
                         var group = 'By sex';
                         var indicatorArray = [];
@@ -466,10 +465,82 @@
                                     name: 'Pneumonia with Covid19',
                                     type: 'bar',
                                     data: pneumoniaDeaths,
-                                    color: '#ff073a'
+                                    color: '#f14668'
                                 }
                             ]
                         });
+
+                    }).catch(error=>{
+                    console.log(error.response.data)
+                })
+            },
+
+            drawPieChartAccordingSex(){
+                this.axiosInstance.get('https://data.cdc.gov/resource/hc4f-j6nb.json')
+                    .then(response=> {
+                        // eslint-disable-next-line no-empty
+                        var group = 'By sex';
+                        var indicator = 'Total Deaths';
+                        for (var i = 0; i < response.data.length; i++){
+                            if(response.data[i].group == group && response.data[i].indicator == indicator){
+                                var covidDeaths = response.data[i].covid_deaths;
+                                var pneumonia = response.data[i].pneumonia_and_covid_deaths;
+
+                            }
+                        }
+                        console.log(covidDeaths);
+                        console.log(pneumonia);
+                        const myChart = window.echarts.init(document.getElementById('pieChart'));
+                        myChart.setOption({
+                            color: ['#f14668', '#3298dc'],
+                            title: {
+                                left: 'center'
+                            },
+                            tooltip: {
+                                trigger: 'item',
+                            },
+
+                            toolbox: {
+                                feature: {
+                                    saveAsImage: {
+                                        title: 'Save as image'
+                                    }
+                                }
+                            },
+
+                            legend: {
+                                bottom: 10,
+                                left: 'center',
+                                data: ['Covid19', 'Pneumonia with Covid19']
+                            },
+                            series: [
+                                {
+                                    type: 'pie',
+                                    radius: '80%',
+                                    center: ['50%', '50%'],
+                                    data: [
+                                        {
+                                            label: {
+                                                backgroundColor: '#eee',
+                                                borderColor: '#777',
+                                                borderWidth: 1,
+                                                borderRadius: 4,
+
+                                            }
+                                        },
+                                        {value: covidDeaths, name: 'Covid19'},
+                                        {value: pneumonia, name: 'Pneumonia with Covid19'}
+                                    ],
+                                    emphasis: {
+                                        itemStyle: {
+                                            shadowBlur: 10,
+                                            shadowOffsetX: 0,
+                                            shadowColor: 'rgba(0, 0, 0, 0.5)'
+                                        }
+                                    }
+                                }
+                            ]
+                        }, true)
 
                     }).catch(error=>{
                     console.log(error.response.data)
