@@ -91,6 +91,42 @@
                     </div>
                 </div>
 
+                <section>
+                    <div class="container">
+                        <div class="visualization-wrapper box mb2">
+                            <h2 class="subtitle has-text-centered">
+                                Age wise analysis(Death cases)
+                            </h2>
+                            <div id="barByAge" style="height: 600px"></div>
+
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <div class="container">
+                        <div class="visualization-wrapper box mb2">
+                            <h2 class="subtitle has-text-centered">
+                                Gender wise analysis(Death cases)
+                            </h2>
+                            <div id="barBySex" style="height: 400px"></div>
+
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <div class="container">
+                        <div class="visualization-wrapper box mb2">
+                            <h2 class="subtitle has-text-centered">
+                                Disease wise analysis(Death cases)
+                            </h2>
+                            <div id="pieChart" style="height: 400px"></div>
+
+                        </div>
+                    </div>
+                </section>
+
                 <div class="box mb8">
                     <h2 class="subtitle has-text-centered">
                         Data Sources
@@ -141,6 +177,8 @@
             this.fetchData();
             this.drawBarGraph();
             this.drawTable();
+            this.drawDemographicBarGraphByAge();
+            this.drawDemographicBarGraphBySex();
         },
 
         methods: {
@@ -300,6 +338,140 @@
                         this.$data.last_updated = (new Date(response.data.created_at * 1000 )).toDateString();
                         this.$data.hoursAgo = timeDifferenceForHumans((new Date().getTime()), (new Date(response.data.created_at * 1000)).getTime());
                     }).catch(error => {
+                    console.log(error.response.data)
+                })
+            },
+
+            drawDemographicBarGraphByAge(){
+                this.axiosInstance.get('https://data.cdc.gov/resource/hc4f-j6nb.json')
+                .then(response=> {
+                    console.log(response.data);
+                    // eslint-disable-next-line no-empty
+                    var group = 'By age';
+                    var indicatorArray = [];
+                    var covidDeathsArray = [];
+                    var pneumoniaDeaths = [];
+                    for (var i = 0; i < response.data.length; i++){
+                        if(response.data[i].group == group){
+                            var indicator = response.data[i].indicator;
+                            var covidDeaths = response.data[i].covid_deaths;
+                            var pneumonia = response.data[i].pneumonia_and_covid_deaths;
+
+                            indicatorArray.push(indicator);
+                            covidDeathsArray.push(covidDeaths);
+                            pneumoniaDeaths.push(pneumonia);
+                        }
+
+                    }
+                    const myChart = window.echarts.init(document.getElementById('barByAge'));
+                    myChart.setOption({
+                        tooltip: {
+                            trigger: 'axis',
+                            axisPointer: {
+                                type: 'shadow'
+                            }
+                        },
+                        legend: {
+                            data: ['Covid19', 'Pneumonia with Covid19']
+                        },
+                        grid: {
+                            left: '3%',
+                            right: '4%',
+                            bottom: '3%',
+                            containLabel: true
+                        },
+                        xAxis: {
+                            type: 'value',
+                            boundaryGap: [0, 0.01]
+                        },
+                        yAxis: {
+                            type: 'category',
+                            data: indicatorArray
+                        },
+                        series: [
+                            {
+                                name: 'Covid19',
+                                type: 'bar',
+                                data: covidDeathsArray,
+                                color: '#007bff',
+                            },
+                            {
+                                name: 'Pneumonia with Covid19',
+                                type: 'bar',
+                                data: pneumoniaDeaths,
+                                color: '#ff073a'
+                            }
+                        ]
+                    })
+
+                }).catch(error=>{
+                    console.log(error.response.data)
+                })
+            },
+
+            drawDemographicBarGraphBySex(){
+                this.axiosInstance.get('https://data.cdc.gov/resource/hc4f-j6nb.json')
+                    .then(response=> {
+                        console.log(response.data);
+                        // eslint-disable-next-line no-empty
+                        var group = 'By sex';
+                        var indicatorArray = [];
+                        var covidDeathsArray = [];
+                        var pneumoniaDeaths = [];
+                        for (var i = 0; i < response.data.length; i++){
+                            if(response.data[i].group == group){
+                                var indicator = response.data[i].indicator;
+                                var covidDeaths = response.data[i].covid_deaths;
+                                var pneumonia = response.data[i].pneumonia_and_covid_deaths;
+
+                                indicatorArray.push(indicator);
+                                covidDeathsArray.push(covidDeaths);
+                                pneumoniaDeaths.push(pneumonia);
+                            }
+
+                        }
+                        const myChart = window.echarts.init(document.getElementById('barBySex'));
+                        myChart.setOption({
+                            tooltip: {
+                                trigger: 'axis',
+                                axisPointer: {
+                                    type: 'shadow'
+                                }
+                            },
+                            legend: {
+                                data: ['Covid19', 'Pneumonia with Covid19']
+                            },
+                            grid: {
+                                left: '3%',
+                                right: '4%',
+                                bottom: '3%',
+                                containLabel: true
+                            },
+                            xAxis: {
+                                type: 'value',
+                                boundaryGap: [0, 0.01]
+                            },
+                            yAxis: {
+                                type: 'category',
+                                data: indicatorArray
+                            },
+                            series: [
+                                {
+                                    name: 'Covid19',
+                                    type: 'bar',
+                                    data: covidDeathsArray,
+                                    color: '#007bff',
+                                },
+                                {
+                                    name: 'Pneumonia with Covid19',
+                                    type: 'bar',
+                                    data: pneumoniaDeaths,
+                                    color: '#ff073a'
+                                }
+                            ]
+                        });
+
+                    }).catch(error=>{
                     console.log(error.response.data)
                 })
             },
