@@ -5,9 +5,9 @@
             <h1 class="title has-text-centered">
                 Novel Corona Virus (COVID-19) Statistics Switzerland
             </h1>
-<!--            <h2 class="subtitle has-text-centered mb2">-->
-<!--                Last updated: {{lastUpdatedTime}} ({{hoursAgo}})-->
-<!--            </h2>-->
+            <h2 class="subtitle has-text-centered mb2">
+                Last updated: {{lastUpdatedTime}} ({{hoursAgo}})
+            </h2>
             <div class="columns has-text-centered main-stats mt5 mb4">
                 <div class="column">
                     <p class="title is-size-4 confirmed-color-light">
@@ -82,7 +82,7 @@
 
                             <template slot-scope="props">
                                 <b-table-column class="table-padding2" field="name" label="Kantons" >
-                                    {{props.row.kanton}}
+                                    {{getStateNameFromId(props.row.kanton)}}
                                 </b-table-column>
                                 <b-table-column class="table-padding2" field="confirmed" label="Confirmed Cases" >
                                     <span class="confirmed-color">
@@ -108,6 +108,40 @@
 
         </section>
 
+        <section>
+            <div class="container">
+                <div class="box mb8">
+                    <h2 class="subtitle has-text-centered">
+                        Data Sources
+                    </h2>
+                    <p class="mt2">
+                        All data shown on this page has been sourced from
+                        <a href="https://github.com/amodm/api-covid19-in" target="_blank">
+                            Daniel Probst's Maintained Github Repository
+                        </a>
+                    </p>
+
+                    <p class="mt2">
+                        All data on Daniel Probst's repository has been in turn sourced from
+                        <a href="http://open.zh.ch/internet/justiz_inneres/ogd/de/home.html" target="_blank">
+                            Canton of Zurich,
+                            Directorate of Justice and Home Affairs,
+                            Specialist and coordination office OGD
+                        </a>.
+                    </p>
+
+                    <p class="mt2">
+                        Canton of Zurich,
+                        Directorate of Justice and Home Affairs,
+                        Specialist and coordination office OGD maintains a github repository
+                        <a href="https://github.com/openZH/covid_19" target="_blank">
+                            Specialist Unit for Open Government Data Canton of Zurich
+                        </a>.
+                    </p>
+                </div>
+            </div>
+        </section>
+
         <main-footer></main-footer>
 
     </div>
@@ -127,6 +161,36 @@
         },
         data(){
             return{
+                lastUpdatedTime:'',
+                hoursAgo:'',
+                idNameDict: [
+                    {id: 'AG', name: 'Aargau'},
+                    {id: 'AI', name: 'Appenzell Inner-Rhoden'},
+                    {id: 'AR', name: 'Appenzell Ausser-Rhoden'},
+                    {id: 'BE', name: 'Bern'},
+                    {id: 'BL', name: 'Basel-Landschaft'},
+                    {id: 'BS', name: 'Basel-Stadt'},
+                    {id: 'FR', name: 'Fribourg'},
+                    {id: 'GE', name: 'Genève'},
+                    {id: 'GL', name: 'Glarus'},
+                    {id: 'GR', name: 'Graubünden'},
+                    {id: 'JU', name: 'Jura'},
+                    {id: 'LU', name: 'Lucerne'},
+                    {id: 'NE', name: 'Neuchâtel'},
+                    {id: 'NW', name: 'Nidwalden'},
+                    {id: 'OW', name: 'Obwalden'},
+                    {id: 'SG', name: 'Sankt Gallen'},
+                    {id: 'SH', name: 'Schaffhausen'},
+                    {id: 'SO', name: 'Solothurn'},
+                    {id: 'SZ', name: 'Schwyz'},
+                    {id: 'TG', name: 'Thurgau'},
+                    {id: 'TI', name: 'Ticino'},
+                    {id: 'UR', name: 'Uri'},
+                    {id: 'VD', name: 'Vaud'},
+                    {id: 'VS', name: 'Valais'},
+                    {id: 'ZG', name: 'Zug'},
+                    {id: 'ZH', name: 'Zürich'}
+                ],
                 totalConfirmedCases: '',
                 totalRecoveredCases: '',
                 totalDeathCases: '',
@@ -149,6 +213,11 @@
         methods:{
             withCommas(number){
                 return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+            },
+
+            getStateNameFromId(id){
+                if(id === 'CH') return 'All of Switzerland Total';
+                return this.$data.idNameDict.filter(item=>item.id === id)[0].name;
             },
 
             fetchDataDayWiseInSwitzerland(){
