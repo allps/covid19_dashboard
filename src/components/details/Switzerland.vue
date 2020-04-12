@@ -37,9 +37,9 @@
                 </div>
             </div>
 
-<!--            <div class="visualization-wrapper">-->
-<!--                <india-map></india-map>-->
-<!--            </div>-->
+            <div class="visualization-wrapper">
+                <switzerland-map v-bind:swiss-map-data="kantons"></switzerland-map>
+            </div>
         </section>
 
         <section>
@@ -116,10 +116,12 @@
 <script>
 
     import axios from "axios";
+    import SwitzerlandMap from "../maps/SwitzerlandMap";
 
     export default {
         name: "switzerland.vue",
         components:{
+            SwitzerlandMap,
             MainFooter: () => import('../MainFooter'),
             MainNavbar: () => import('../MainNavbar.vue')
         },
