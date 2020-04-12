@@ -13,7 +13,7 @@
                     <p class="title is-size-4">
                         Confirmed
                     </p>
-                    <p class="subtitle is-size-3">
+                    <p class="subtitle is-size-3 confirmed-color">
                         {{withCommas(totalConfirmedCases)}}
                     </p>
                 </div>
@@ -22,7 +22,7 @@
                     <p class="title is-size-4">
                         Deaths
                     </p>
-                    <p class="subtitle is-size-3">
+                    <p class="subtitle is-size-3 deaths-color">
                         {{withCommas(totalDeathCases)}}
                     </p>
                 </div>

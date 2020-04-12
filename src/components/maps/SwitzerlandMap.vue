@@ -12,7 +12,7 @@
                                         <select @change="paintMap(statToShow)" v-model="statToShow" ref="selectedItem">
                                             <option value="confirmed" selected>Showing Confirmed Cases</option>
                                             <option value="recovered">Showing Recovered Cases</option>
-                                            <option value="deaths">Showing Deaths</option>
+                                            <option value="death">Showing Deaths</option>
                                         </select>
                                     </div>
                                 </div>
@@ -72,19 +72,19 @@
                 color_swatch:{
                     confirmed: ['#e5f2ff','#b3d7ff','#4da3ff','#1a88ff','#006fe6','#0056b3', '#003d80'],
                     recovered: ['#c1f0cc','#98e6aa','#6fdd88','#46d366', '#2cb94d', '#22903c', '#19672b'],
-                    deaths: ['#ffe5eb','#ffb3c2','#ff809a','#ff4d71','#ff1a49', '#e6002f', '#b30025'],
+                    death: ['#ffe5eb','#ffb3c2','#ff809a','#ff4d71','#ff1a49', '#e6002f', '#b30025'],
                 },
             }
         },
 
         methods: {
             paintMap(statToShow){
-                if(['confirmed', 'recovered', 'deaths'].includes(statToShow)) {
+                if(['confirmed', 'recovered', 'death'].includes(statToShow)) {
                     let color_swatch = this.$data.color_swatch[statToShow];
                     this.swissMapData.forEach(state_data => {
                         let color_index = this.getColorIndex(state_data[statToShow]);
+                        console.log(state_data[statToShow])
                         let state = document.getElementById('CH-' + state_data.kanton);
-
                         if(state) {
                             state.style.fill = color_swatch[color_index];
                         } else {
