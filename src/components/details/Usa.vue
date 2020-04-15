@@ -524,18 +524,17 @@
                     .then(response=> {
                         // eslint-disable-next-line no-empty
                         var group = 'By sex';
-                        var indicator = 'Total Deaths';
+                        var indicator = "Total deaths";
                         for (var i = 0; i < response.data.length; i++){
-                            if(response.data[i].group == group && response.data[i].indicator == indicator){
+                            if(response.data[i].group === group && response.data[i].indicator === indicator){
                                 var covidDeaths = response.data[i].covid_deaths;
                                 var pneumonia = response.data[i].pneumonia_and_covid_deaths;
                                 var influenza = response.data[i].all_influenza_deaths_j09_j11;
                             }
                         }
-                        console.log(covidDeaths);
-                        console.log(pneumonia);
-                        const myChart = window.echarts.init(document.getElementById('pieChart'));
-                        myChart.setOption({
+
+                        const pieChart = window.echarts.init(document.getElementById('pieChart'));
+                        pieChart.setOption({
                             color: ['#f14668', '#3298dc', '#48c774'],
                             title: {
                                 left: 'center'
