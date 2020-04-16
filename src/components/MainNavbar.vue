@@ -47,6 +47,9 @@
                         <a href="/covid19-information" class="navbar-item">
                             Covid-19 Information
                         </a>
+                        <a href="/EconomicImpact" class="navbar-item">
+                            Covid-19 Impact on Economy
+                        </a>
                         <div class="buttons">
                             <a href="https://github.com/allps/covid19_analysis/" target="_blank" class="button is-small is-primary is-outlined">
                                 Contribute

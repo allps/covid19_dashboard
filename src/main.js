@@ -35,6 +35,13 @@ const router = new VueRouter({
             }
         },
         {
+            name: 'Economic Impact due to covid-19',
+            path: "/EconomicImpact",
+            component: () => {
+                return import('./components/EconomicImpact')
+            }
+        },
+        {
             name: 'Page Not Found',
             path: "*",
             component: () => {
