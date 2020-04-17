@@ -10,11 +10,11 @@
             </h2>
             <div class="columns has-text-centered main-stats">
                 <div class="column">
-<<<<<<< HEAD
+
                     <p class="title is-size-4 confirmed-color">
-=======
+
                     <p class="title is-size-4 confirmed-color-light">
->>>>>>> 33d489d19d0bcb28f50c9ed049ab55a242369d77
+
                         Confirmed
                     </p>
                     <p class="subtitle is-size-3 confirmed-color">
@@ -23,11 +23,11 @@
                 </div>
 
                 <div class="column">
-<<<<<<< HEAD
+
                     <p class="title is-size-4 deaths-color">
-=======
+
                     <p class="title is-size-4 deaths-color-light">
->>>>>>> 33d489d19d0bcb28f50c9ed049ab55a242369d77
+
                         Deaths
                     </p>
                     <p class="subtitle is-size-3 deaths-color">
