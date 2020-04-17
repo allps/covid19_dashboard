@@ -2,8 +2,8 @@
     <div>
         <main-navbar></main-navbar>
         <section class="section pt0">
-            <h2 class="title is-2 has-text-centered mb4 mt2">
-                Economic Impact due to covid-19
+            <h2 class="title is-3 has-text-centered mb4 mt2">
+                Economic Impact due to Covid-19
             </h2>
 
             <div class="container">
@@ -11,16 +11,16 @@
              
  <!-- Impact on the global economy  -->
 
-                    <h3 class="title is-3 has-text-centered mb2 mt1">
+                    <h3 class="title is-4 has-text-centered mb2 mt1">
                           Impact on the global economy
-                    </h3>
-                    <h4 class="subtitle is-4 mb0">
+                    </h3><br>
+                    <h4 class="subtitle is-5 mb0">
                         Basic Information
                    </h4>
                     <p class="content is-medium">
                        <ol>
                             <li>    
-                            Lockdown Has cut the economic Output by 31%, Costing us &#163;2.4 billion a day.
+                            Lockdown has cut the economic Output by 31%, Costing us &#163;2.4 billion a day.
                             </li>
                             <li>
                             Hotels and restaurants are down by &#163;172m. 
@@ -34,7 +34,7 @@
                         </ol>
                     </p>
                     
-                    <h4 class="subtitle is-4 mb0">
+                    <h4 class="subtitle is-5 mb0">
                         Impact on job Sector
                     </h4>
                       <p class="content is-medium">
@@ -61,30 +61,22 @@
                             1.25 billion workers are employed in the sectors identified as being at high risk of "drastic and devastating" increases in layoffs and reductions in wages and working hours.
                             </li>
                         </ol>
-                    </p>
+                    </p><br>
 
-                    <h4 class="subtitle is-4 mb0">
+                    <h4 class="subtitle is-5 mb0">
                         Stock Market   
                     </h4>
-                    <p>
-                      
-                     </p>
+                    <br>
                 
                      <figure class="image is-16by9">
                           <img src="../assets/image7.png">
                      </figure>
-                     
-                     <p>
-                      <br/>
-                     </p>   
-
+                    <br>
                      <figure class="image is-16by9">
                           <img src="../assets/g3.png">
                      </figure>
 
-                     <p>
-                        <br/>
-                     </p>   
+                    <br>
 
                     <h6 class="subtitle is-5 mb0">
                         Orignal and Restated Forecast of Global GDP 
@@ -97,7 +89,7 @@
                      <figure class="image is-16by9">
                           <img src="../assets/image13.png">
                      </figure>
-                                         
+                        <br><br>
                      <h6 class="subtitle is-5 mb0">
                         Growth of the gross domestic product (GDP) in selected countries from 2014 to 2024
                     </h6>
@@ -106,7 +98,7 @@
                           <img src="../assets/image14.png">
                      </figure>
                      
-
+                    <br><br>
                      
                     <h6 class="subtitle is-5 mb0">
                         Forecasted monetary global GDP loss due to COVID-19 
@@ -119,20 +111,14 @@
                      <figure class="image is-16by9">
                           <img src="../assets/image9.png">
                      </figure>
-                  
-                     <p>
-                        <br/><br/>
-                     </p>
- 
- 
-
+                    <br><br>
  <!-- Effects of covid19 on US economy  -->
  
-                    <h3 class="title is-3 has-text-centered mb2 mt1">
+                    <h3 class="title is-4 has-text-centered mb2 mt1">
                             Effects of covid19 on US economy
                     </h3>
 
-                   <h4 class="subtitle is-4 mb0">
+                   <h4 class="subtitle is-5 mb0">
                         Basic Information
                    </h4>
 
@@ -151,52 +137,37 @@
                           <img src="../assets/image11.png">
                    </figure>
                      
-                     <p>
-                      <br/>
-                     </p>   
+                    <br>
 
-                     <figure class="image is-16by9">
-                          <img src="../assets/image4.png">
-                     </figure>
+                         <figure class="image is-16by9">
+                              <img src="../assets/image4.png">
+                         </figure>
+                    <br>
 
-                     <p>
-                      <br/>
-                     </p>   
+                         <figure class="image is-16by9">
+                              <img src="../assets/image15.png">
+                         </figure>
 
-                     <figure class="image is-16by9">
-                          <img src="../assets/image15.png">
-                     </figure>
-
-                    <p>
-                      <br/>
-                    </p>   
+                    <br>
                    
-                    <h4 class="subtitle is-4 mb0">
-                        Stock Market   
-                    </h4>
-                      
-                 
-                   <p>
-                   
-                   </p>
+                        <h4 class="subtitle is-5 mb0">
+                            Stock Market
+                        </h4>
 
-                   <figure class="image is-16by9">
-                        <img src="../assets/g3.png">
-                    </figure>
-                  
-                    <p>
-                        <br/><br/>
-                    </p>
- 
- 
+                    <br>
 
+                       <figure class="image is-16by9">
+                            <img src="../assets/g3.png">
+                        </figure>
+
+                    <br><br>
  <!-- Effects of covid19 on Indian economy  -->
  
-                    <h3 class="title is-3 has-text-centered mb2 mt1">
+                    <h3 class="title is-4 has-text-centered mb2 mt1">
                             Effects of covid19 on Indian economy
                     </h3>
 
-                   <h4 class="subtitle is-4 mb0">
+                   <h4 class="subtitle is-5 mb0">
                         Basic Information
                    </h4>
 
@@ -226,7 +197,7 @@
                         </ol>
                     </p>
 
-                    <h4 class="subtitle is-4 mb0">
+                    <h4 class="subtitle is-5 mb0">
                         Impact on job Sector
                     </h4>
                       <p class="content is-medium">
@@ -244,16 +215,13 @@
                     </p>
 
  <!-- Effects of covid19 on Europe  -->
-                    
-                    <p>
-                          </br>
-                    </p>
+                    <br>
 
-                    <h3 class="title is-3 has-text-centered mb2 mt1">
+                    <h3 class="title is-4 has-text-centered mb2 mt1">
                             Effects of covid19 on Europe
                     </h3>
 
-                   <h4 class="subtitle is-4 mb0">
+                   <h4 class="subtitle is-5 mb0">
                         General:
                    </h4>
 
@@ -278,16 +246,13 @@
                     </p>
 
  <!-- Effects of covid19 on African Continent  -->
-                    
-                    <p>
-                          </br>
-                    </p>
+                    <br>
 
-                    <h3 class="title is-3 has-text-centered mb2 mt1">
+                    <h3 class="title is-4 has-text-centered mb2 mt1">
                             Effects of covid19 on African Continent
                     </h3>
 
-                   <h4 class="subtitle is-4 mb0">
+                   <h4 class="subtitle is-5 mb0">
                         General:
                    </h4>
 
@@ -305,27 +270,23 @@
                         </ol>
                     </p>
 
+                </div>
 
-
-
-
-
-
-
-                    <br><br><br>
-                    <p>
+                <div class="box mb8">
+                    <h2 class="subtitle has-text-centered">
+                        Data Sources
+                    </h2>
+                    <p class="has-text-centered">
                         Information taken from <a href="https://www.ilo.org/wcmsp5/groups/public/@dgreports/@dcomm/documents/briefingnote/wcms_740877.pdf" target="_blank">International labour organisation</a>,
                         <a href="https://www.dol.gov/ui/data.pdf" target="_blank">U.S. Department of Labor</a>,
                         <a href="https://cebr.com/reports/coronavirus-is-currently-spreading-six-times-faster-than-sars-unless-a-cure-is-found-this-could-push-a-fragile-world-economic-recovery-into-reverse/" target="_blank">CEBR</a>,
                         <a href="https://www.bloombergquint.com/markets/jobs-destroyed-worldwide-as-coronavirus-sparks-recession" target="_blank">BloombergQuint</a>,
                         <a href="https://www.statista.com/topics/6139/covid-19-impact-on-the-global-economy/" target="_blank">statista</a>,
                         <a href="https://economictimes.indiatimes.com/news/international/world-news/about-25-million-jobs-could-be-lost-worldwide-due-to-coronavirus-united-nations/articleshow/74705919.cms" target="_blank">The Economic Times</a>.
-                                        
                     </p>
                 </div>
             </div>
         </section>
-
         <main-footer></main-footer>
     </div>
 </template>
