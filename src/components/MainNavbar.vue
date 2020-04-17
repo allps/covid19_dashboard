@@ -32,7 +32,7 @@
                             </a>
                             <hr class="navbar-divider">
                             <a href="/" class="navbar-item">
-                                Worlwide
+                                Worldwide
                             </a>
                         </div>
                     </div>

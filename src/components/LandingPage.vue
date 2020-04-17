@@ -3,7 +3,7 @@
         <main-navbar></main-navbar>
         <section class="section pt0">
             <h1 class="title has-text-centered">
-                Novel Corona Virus (COVID-19) Statistics
+               Worldwide Novel Corona Virus (COVID-19) Statistics
             </h1>
             <h2 class="subtitle has-text-centered mb2">
                 Last updated: {{lastUpdatedTime}} ({{hoursAgo}})

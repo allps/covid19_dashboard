@@ -10,19 +10,19 @@
             </h2>
             <div class="columns has-text-centered main-stats">
                 <div class="column">
-                    <p class="title is-size-4">
+                    <p class="title is-size-4 confirmed-color">
                         Confirmed
                     </p>
-                    <p class="subtitle is-size-3">
+                    <p class="subtitle is-size-3 confirmed-color">
                         {{withCommas(totalConfirmedCases)}}
                     </p>
                 </div>
 
                 <div class="column">
-                    <p class="title is-size-4">
+                    <p class="title is-size-4 deaths-color">
                         Deaths
                     </p>
-                    <p class="subtitle is-size-3">
+                    <p class="subtitle is-size-3 deaths-color">
                         {{withCommas(totalDeathCases)}}
                     </p>
                 </div>
