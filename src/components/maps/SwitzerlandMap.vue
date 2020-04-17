@@ -12,7 +12,7 @@
                                         <select @change="paintMap(statToShow)" v-model="statToShow" ref="selectedItem">
                                             <option value="confirmed" selected>Showing Confirmed Cases</option>
                                             <option value="recovered">Showing Recovered Cases</option>
-                                            <option value="deaths">Showing Deaths</option>
+                                            <option value="death">Showing Deaths</option>
                                         </select>
                                     </div>
                                 </div>
@@ -84,7 +84,6 @@
                     this.swissMapData.forEach(state_data => {
                         let color_index = this.getColorIndex(state_data[statToShow]);
                         let state = document.getElementById('CH-' + state_data.kanton);
-
                         if(state) {
                             state.style.fill = color_swatch[color_index];
                         } else {

@@ -151,6 +151,7 @@
 
     import axios from "axios";
     import SwitzerlandMap from "../maps/SwitzerlandMap";
+    import {timeDifferenceForHumans} from '../../utils/utils'
 
     export default {
         name: "switzerland.vue",
@@ -231,8 +232,11 @@
                     var recovered_list  = response.data.recoveredCases.recovered;
                     var death_list  = response.data.deathCases.death;
                     this.drawChartDayWise(date_list, confirmed_list, recovered_list, death_list)
+
+                    this.$data.lastUpdatedTime = (new Date(parseInt(response.data.confirmedCases.created_at) * 1000)).toDateString();
+                    this.$data.hoursAgo = timeDifferenceForHumans((new Date().getTime()), (new Date(parseInt(response.data.confirmedCases.created_at) * 1000)).getTime());
                 }).catch(error=>{
-                    console.log(error.response.data)
+                    console.log(error)
                 })
             },
 
