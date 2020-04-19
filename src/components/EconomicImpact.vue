@@ -214,7 +214,6 @@
 
  <!-- Effects of covid19 on Europe  -->
                     <br>
-
                     <h3 class="title is-4 has-text-centered mb2 mt1">
                             Effects of covid19 on Europe
                     </h3>
@@ -245,7 +244,6 @@
 
  <!-- Effects of covid19 on African Continent  -->
                     <br>
-
                     <h3 class="title is-4 has-text-centered mb2 mt1">
                             Effects of covid19 on African Continent
                     </h3>
