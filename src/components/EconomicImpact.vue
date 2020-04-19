@@ -153,7 +153,6 @@
                         </h4>
 
                     <br>
-
                        <figure class="image is-16by9">
                             <img src="../assets/g3.png">
                         </figure>
