@@ -147,17 +147,7 @@
                               <img src="../assets/image15.png">
                          </figure>
                     <br>
-                   
-                        <h4 class="subtitle is-5 mb0">
-                            Stock Market
-                        </h4>
 
-                    <br>
-                       <figure class="image is-16by9">
-                            <img src="../assets/g3.png">
-                        </figure>
-
-                    <br><br>
  <!-- Effects of covid19 on Indian economy  -->
  
                     <h3 class="title is-4 has-text-centered mb2 mt1">
